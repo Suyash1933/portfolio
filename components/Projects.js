@@ -1,6 +1,6 @@
 'use client'
-import { useEffect, useRef } from 'react'
-import { Code2, ExternalLink, Github, Users, Trophy } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { Code2, ExternalLink, Github, Users, Trophy, ChevronDown, ChevronUp } from 'lucide-react'
 
 const projects = [
   {
@@ -83,8 +83,13 @@ const projects = [
   },
 ]
 
+const INITIAL_COUNT = 2
+
 export default function Projects() {
   const sectionRef = useRef(null)
+  const [showAll, setShowAll] = useState(false)
+
+  const visibleProjects = showAll ? projects : projects.slice(0, INITIAL_COUNT)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -93,7 +98,7 @@ export default function Projects() {
     )
     sectionRef.current?.querySelectorAll('.section-reveal').forEach((el) => observer.observe(el))
     return () => observer.disconnect()
-  }, [])
+  }, [showAll])
 
   return (
     <section id="projects" className="py-28 relative" ref={sectionRef}>
@@ -125,7 +130,7 @@ export default function Projects() {
 
         {/* Project cards */}
         <div className="flex flex-col gap-8">
-          {projects.map((proj, i) => (
+          {visibleProjects.map((proj, i) => (
             <div
               key={i}
               className="section-reveal card-hover rounded-2xl overflow-hidden"
@@ -252,6 +257,53 @@ export default function Projects() {
             </div>
           ))}
         </div>
+
+        {/* Show More / Less toggle */}
+        {projects.length > INITIAL_COUNT && (
+          <div className="section-reveal visible mt-10 text-center">
+            <button
+              onClick={() => setShowAll((prev) => !prev)}
+              className="group"
+              style={{
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                borderRadius: '12px',
+                padding: '12px 32px',
+                color: 'var(--text)',
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: '0.8rem',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                transition: 'all 0.3s ease',
+                letterSpacing: '0.03em',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--accent)'
+                e.currentTarget.style.color = 'var(--accent)'
+                e.currentTarget.style.boxShadow = '0 8px 30px rgba(124, 109, 250, 0.15)'
+                e.currentTarget.style.transform = 'translateY(-2px)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--border)'
+                e.currentTarget.style.color = 'var(--text)'
+                e.currentTarget.style.boxShadow = 'none'
+                e.currentTarget.style.transform = 'translateY(0)'
+              }}
+            >
+              {showAll ? (
+                <>
+                  Show Less <ChevronUp size={16} />
+                </>
+              ) : (
+                <>
+                  Show More  <ChevronDown size={16} />
+                </>
+              )}
+            </button>
+          </div>
+        )}
 
         {/* GitHub CTA */}
         <div className="section-reveal mt-12 text-center">

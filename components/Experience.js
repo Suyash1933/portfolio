@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import { Briefcase, ExternalLink, ChevronRight } from 'lucide-react'
+import { Briefcase, ExternalLink, ChevronRight, Award } from 'lucide-react'
 
 const experiences = [
   {
@@ -10,6 +10,7 @@ const experiences = [
     type: 'Full-Stack',
     color: '#7c6dfa',
     tech: ['React', 'Node.js', 'Express.js', 'PostgreSQL', 'WebSockets', 'Whisper API'],
+    certificate: 'https://example.com/certificate-tech-weave-labs',
     points: [
       'Built a full-stack Hospital Management System using React, Node.js, Express, and PostgreSQL, supporting seamless workflows for Admin, Doctors, and Patients.',
       'Designed a real-time OPD queue system using WebSockets to reduce wait time and improve patient flow and doctor efficiency.',
@@ -18,12 +19,13 @@ const experiences = [
     ],
   },
   {
-    company: 'Zeotap',
-    role: 'Software Engineering Intern',
-    period: 'May 2025 – July 2025',
+    company: 'Algonive',
+    role: 'Backend Developer Intern',
+    period: 'Jan 2026 – Mar 2026',
     type: 'Backend Engineering',
     color: '#fa6d8f',
     tech: ['Java', 'SQLite', 'JSON Serialization', 'SQL', 'CLI'],
+    certificate: 'https://drive.google.com/file/d/1ZvjecF6VuliMf-zh3k_XPrrVWGm8tsHx/view?usp=sharing',
     points: [
       'Built a Native Durable Execution Engine inspired by Temporal/Cadence, enabling workflows to resume from failure without re-running completed side effects.',
       'Implemented a generic Step primitive with SQLite-backed memoization and logical sequence tracking for loops and conditionals.',
@@ -32,12 +34,13 @@ const experiences = [
     ],
   },
   {
-    company: 'Cultivated Meat Production Prediction',
-    role: 'Data Analyst Intern',
-    period: 'Jan 2025 – April 2025',
+    company: 'Skillfied',
+    role: 'Data Science Intern',
+    period: 'May 2025 – June 2025',
     type: 'Machine Learning',
     color: '#6dfabd',
     tech: ['Python', 'Pandas', 'NumPy', 'Scikit-Learn', 'LSTM', 'Jupyter'],
+    certificate: 'https://drive.google.com/file/d/1aRrid7dTbeYx1q8pGvieV3J1PC5tmGxU/view?usp=sharing',
     points: [
       'Built an LSTM-based time series model to forecast cultivated-meat production trends, improving accuracy by 18%.',
       'Performed preprocessing, feature engineering, and hyperparameter tuning using Pandas/NumPy with RMSE and MAE evaluation, increasing model stability by 20%.',
@@ -162,24 +165,68 @@ export default function Experience() {
                       ))}
                     </ul>
 
-                    {/* Tech tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {exp.tech.map((t) => (
-                        <span
-                          key={t}
+                    {/* Tech tags + Certificate */}
+                    <div className="flex flex-wrap items-center justify-between gap-4">
+                      <div className="flex flex-wrap gap-2">
+                        {exp.tech.map((t) => (
+                          <span
+                            key={t}
+                            style={{
+                              fontFamily: 'JetBrains Mono',
+                              fontSize: '0.68rem',
+                              padding: '3px 10px',
+                              borderRadius: '100px',
+                              border: `1px solid ${exp.color}30`,
+                              background: `${exp.color}10`,
+                              color: exp.color,
+                            }}
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+
+                      {exp.certificate && (
+                        <a
+                          href={exp.certificate}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="cert-link"
                           style={{
-                            fontFamily: 'JetBrains Mono',
-                            fontSize: '0.68rem',
-                            padding: '3px 10px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            padding: '6px 16px',
                             borderRadius: '100px',
-                            border: `1px solid ${exp.color}30`,
                             background: `${exp.color}10`,
+                            border: `1px solid ${exp.color}25`,
                             color: exp.color,
+                            fontFamily: "'JetBrains Mono', monospace",
+                            fontSize: '0.7rem',
+                            textDecoration: 'none',
+                            letterSpacing: '0.03em',
+                            transition: 'all 0.3s ease',
+                            whiteSpace: 'nowrap',
+                            flexShrink: 0,
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = `${exp.color}22`
+                            e.currentTarget.style.borderColor = `${exp.color}60`
+                            e.currentTarget.style.boxShadow = `0 4px 20px ${exp.color}20`
+                            e.currentTarget.style.transform = 'translateY(-1px)'
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = `${exp.color}10`
+                            e.currentTarget.style.borderColor = `${exp.color}25`
+                            e.currentTarget.style.boxShadow = 'none'
+                            e.currentTarget.style.transform = 'translateY(0)'
                           }}
                         >
-                          {t}
-                        </span>
-                      ))}
+                          <Award size={13} />
+                          {/* Certificate */}
+                          <ExternalLink size={11} />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
