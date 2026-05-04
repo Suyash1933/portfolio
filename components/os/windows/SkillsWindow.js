@@ -61,7 +61,7 @@ export default function SkillsWindow() {
         Technical Stack
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 10, marginBottom: 28 }}>
+      <div className="os-skills-grid" style={{ marginBottom: 28 }}>
         {skillGroups.map((group) => (
           <div
             key={group.category}
@@ -187,7 +187,7 @@ export default function SkillsWindow() {
         Competitive Programming
       </div>
 
-      <div style={{ display: 'flex', gap: 8 }}>
+      <div className="os-profiles-row">
         {codingProfiles.map(({ name, href, color }) => (
           <a
             key={name}

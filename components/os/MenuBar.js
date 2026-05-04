@@ -5,6 +5,7 @@ import { Battery, BatteryCharging, Sun, RotateCw } from 'lucide-react'
 export default function MenuBar() {
   const [time, setTime] = useState('')
   const [date, setDate] = useState('')
+  const [isMobile, setIsMobile] = useState(false)
   const [showBatteryMenu, setShowBatteryMenu] = useState(false)
   const [brightness, setBrightness] = useState(100)
   const [batteryLevel, setBatteryLevel] = useState(100)
@@ -12,7 +13,13 @@ export default function MenuBar() {
   const [batterySupported, setBatterySupported] = useState(true)
   const menuRef = useRef(null)
 
-  // Clock
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
   useEffect(() => {
     const update = () => {
       const now = new Date()
@@ -32,28 +39,22 @@ export default function MenuBar() {
     return () => clearInterval(id)
   }, [])
 
-  // Real battery API
   useEffect(() => {
     if (!navigator.getBattery) {
       setBatterySupported(false)
       return
     }
-
     let battery = null
-
     const updateBattery = (b) => {
       setBatteryLevel(Math.round(b.level * 100))
       setIsCharging(b.charging)
     }
-
     navigator.getBattery().then((b) => {
       battery = b
       updateBattery(b)
       b.addEventListener('levelchange', () => updateBattery(b))
       b.addEventListener('chargingchange', () => updateBattery(b))
-    }).catch(() => {
-      setBatterySupported(false)
-    })
+    }).catch(() => setBatterySupported(false))
 
     return () => {
       if (battery) {
@@ -63,20 +64,15 @@ export default function MenuBar() {
     }
   }, [])
 
-  // Brightness effect — apply to the screen container
   useEffect(() => {
     const screen = document.querySelector('[data-os-screen]')
-    if (screen) {
-      screen.style.filter = `brightness(${brightness / 100})`
-    }
+    if (screen) screen.style.filter = `brightness(${brightness / 100})`
   }, [brightness])
 
-  // Close menu on outside click
   useEffect(() => {
     const handler = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
+      if (menuRef.current && !menuRef.current.contains(e.target))
         setShowBatteryMenu(false)
-      }
     }
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
@@ -101,16 +97,16 @@ export default function MenuBar() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 18px',
+        padding: isMobile ? '0 10px' : '0 18px',
         borderBottom: '1px solid rgba(218, 193, 193, 0.06)',
         fontFamily:
           "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'DM Sans', sans-serif",
-        fontSize: '0.92rem',
+        fontSize: isMobile ? '0.72rem' : '0.92rem',
         color: '#e8e8f0',
       }}
     >
-      {/* Left: Logo + name */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 14, flex: 1 }}>
+      {/* Left: Logo + name (name hidden on mobile) */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 8 : 14, flex: 1 }}>
         <div
           style={{
             width: 16,
@@ -125,13 +121,16 @@ export default function MenuBar() {
             color: 'white',
             fontFamily: 'Syne, sans-serif',
             letterSpacing: '-0.02em',
+            flexShrink: 0,
           }}
         >
           SM
         </div>
-        <span style={{ fontWeight: 600, letterSpacing: '0.01em' }}>
-          Suyash Mishra
-        </span>
+        {!isMobile && (
+          <span style={{ fontWeight: 600, letterSpacing: '0.01em' }}>
+            Suyash Mishra
+          </span>
+        )}
       </div>
 
       {/* Center: Date + Time */}
@@ -141,16 +140,17 @@ export default function MenuBar() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: 10,
+          gap: 8,
           color: '#c8c8d8',
           fontWeight: 500,
+          fontSize: isMobile ? '0.68rem' : undefined,
         }}
       >
-        <span>{date}</span>
-        <span style={{ color: '#e8e8f0' }}>{time}</span>
+        {!isMobile && <span>{date}</span>}
+        <span style={{ color: '#e8e8f0' }}>{isMobile ? `${date} ${time}` : time}</span>
       </div>
 
-      {/* Right: Battery clickable area */}
+      {/* Right: Battery */}
       <div
         ref={menuRef}
         style={{
@@ -166,32 +166,31 @@ export default function MenuBar() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 5,
+            gap: 4,
             background: showBatteryMenu ? 'rgba(255,255,255,0.1)' : 'none',
             border: 'none',
             cursor: 'pointer',
             color: '#a0a0b8',
-            padding: '2px 8px',
+            padding: '2px 6px',
             borderRadius: 4,
             transition: 'background 0.15s',
-            fontSize: '0.88rem',
+            fontSize: isMobile ? '0.68rem' : '0.88rem',
           }}
           onMouseEnter={(e) => {
             if (!showBatteryMenu)
               e.currentTarget.style.background = 'rgba(255,255,255,0.06)'
           }}
           onMouseLeave={(e) => {
-            if (!showBatteryMenu)
-              e.currentTarget.style.background = 'none'
+            if (!showBatteryMenu) e.currentTarget.style.background = 'none'
           }}
         >
-          <BatteryIcon size={18} style={{ color: batteryColor }} />
+          <BatteryIcon size={isMobile ? 14 : 18} style={{ color: batteryColor }} />
           <span style={{ fontWeight: 500, color: batteryColor }}>
             {batteryLevel}%
           </span>
         </button>
 
-        {/* ===== BATTERY DROPDOWN MENU ===== */}
+        {/* BATTERY DROPDOWN */}
         {showBatteryMenu && (
           <div
             style={{
@@ -199,7 +198,8 @@ export default function MenuBar() {
               top: '100%',
               right: 0,
               marginTop: 6,
-              width: 240,
+              width: isMobile ? 'calc(100vw - 20px)' : 240,
+              maxWidth: 280,
               background: 'rgba(240,240,248,0.97)',
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
@@ -211,140 +211,31 @@ export default function MenuBar() {
               zIndex: 9999999,
             }}
           >
-            {/* Battery status */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 10,
-                marginBottom: 14,
-              }}
-            >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
               <BatteryIcon size={22} style={{ color: batteryLevel <= 15 ? '#ff3b30' : '#1a1a2e' }} />
               <div>
-                <div style={{ fontSize: '0.88rem', fontWeight: 600 }}>
-                  {batteryLevel}%
-                </div>
+                <div style={{ fontSize: '0.88rem', fontWeight: 600 }}>{batteryLevel}%</div>
                 <div style={{ fontSize: '0.68rem', color: '#666', marginTop: 1 }}>
-                  {isCharging
-                    ? 'Charging'
-                    : batterySupported
-                    ? 'Battery'
-                    : 'Battery N/A'}
+                  {isCharging ? 'Charging' : batterySupported ? 'Battery' : 'Battery N/A'}
                 </div>
               </div>
               {isCharging && (
-                <span
-                  style={{
-                    marginLeft: 'auto',
-                    fontSize: '0.6rem',
-                    padding: '2px 7px',
-                    borderRadius: 100,
-                    background: '#34c75920',
-                    color: '#28a745',
-                    fontWeight: 600,
-                    border: '1px solid #34c75940',
-                  }}
-                >
+                <span style={{ marginLeft: 'auto', fontSize: '0.6rem', padding: '2px 7px', borderRadius: 100, background: '#34c75920', color: '#28a745', fontWeight: 600, border: '1px solid #34c75940' }}>
                   ⚡ Plugged In
                 </span>
               )}
             </div>
-
-            {/* Battery bar */}
-            <div
-              style={{
-                height: 6,
-                background: '#d4d4dc',
-                borderRadius: 3,
-                overflow: 'hidden',
-                marginBottom: 16,
-              }}
-            >
-              <div
-                style={{
-                  height: '100%',
-                  width: `${batteryLevel}%`,
-                  borderRadius: 3,
-                  background:
-                    batteryLevel <= 15
-                      ? '#ff3b30'
-                      : batteryLevel <= 30
-                      ? '#ff9500'
-                      : isCharging
-                      ? '#34c759'
-                      : '#007AFF',
-                  transition: 'width 0.5s ease',
-                }}
-              />
+            <div style={{ height: 6, background: '#d4d4dc', borderRadius: 3, overflow: 'hidden', marginBottom: 16 }}>
+              <div style={{ height: '100%', width: `${batteryLevel}%`, borderRadius: 3, background: batteryLevel <= 15 ? '#ff3b30' : batteryLevel <= 30 ? '#ff9500' : isCharging ? '#34c759' : '#007AFF', transition: 'width 0.5s ease' }} />
             </div>
-
-            {/* Divider */}
             <div style={{ height: 1, background: '#d4d4dc', marginBottom: 14 }} />
-
-            {/* Brightness */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 10,
-                marginBottom: 16,
-              }}
-            >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
               <Sun size={15} style={{ color: '#888', flexShrink: 0 }} />
-              <input
-                type="range"
-                min="20"
-                max="100"
-                value={brightness}
-                onChange={(e) => setBrightness(Number(e.target.value))}
-                style={{
-                  flex: 1,
-                  height: 4,
-                  appearance: 'none',
-                  WebkitAppearance: 'none',
-                  background: `linear-gradient(to right, #007AFF ${((brightness - 20) / 80) * 100}%, #d4d4dc ${((brightness - 20) / 80) * 100}%)`,
-                  borderRadius: 2,
-                  outline: 'none',
-                  cursor: 'pointer',
-                  accentColor: '#007AFF',
-                }}
-              />
+              <input type="range" min="20" max="100" value={brightness} onChange={(e) => setBrightness(Number(e.target.value))} style={{ flex: 1, height: 4, appearance: 'none', WebkitAppearance: 'none', background: `linear-gradient(to right, #007AFF ${((brightness - 20) / 80) * 100}%, #d4d4dc ${((brightness - 20) / 80) * 100}%)`, borderRadius: 2, outline: 'none', cursor: 'pointer' }} />
               <Sun size={18} style={{ color: '#555', flexShrink: 0 }} />
             </div>
-
-            {/* Divider */}
             <div style={{ height: 1, background: '#d4d4dc', marginBottom: 10 }} />
-
-            {/* Restart button */}
-            <button
-              onClick={() => {
-                setShowBatteryMenu(false)
-                window.location.reload()
-              }}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                width: '100%',
-                padding: '8px 10px',
-                borderRadius: 8,
-                border: 'none',
-                background: 'transparent',
-                cursor: 'pointer',
-                color: '#1a1a2e',
-                fontSize: '0.82rem',
-                fontFamily: 'inherit',
-                fontWeight: 500,
-                transition: 'background 0.15s',
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.background = 'rgba(0,0,0,0.06)')
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.background = 'transparent')
-              }
-            >
+            <button onClick={() => { setShowBatteryMenu(false); window.location.reload() }} style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%', padding: '8px 10px', borderRadius: 8, border: 'none', background: 'transparent', cursor: 'pointer', color: '#1a1a2e', fontSize: '0.82rem', fontFamily: 'inherit', fontWeight: 500, transition: 'background 0.15s' }} onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(0,0,0,0.06)')} onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}>
               <RotateCw size={14} style={{ color: '#555' }} />
               Restart
             </button>

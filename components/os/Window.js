@@ -1,5 +1,6 @@
 'use client'
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { ArrowLeft } from 'lucide-react'
 
 export default function Window({
   title,
@@ -70,15 +71,19 @@ export default function Window({
         left: full ? 0 : pos.x,
         top: full ? 28 : pos.y,
         width: full ? '100%' : defaultSize.w,
-        height: full ? 'calc(100% - 28px - 76px)' : defaultSize.h,
+        height: full ? (isMobile ? 'calc(100% - 28px - 58px)' : 'calc(100% - 28px - 76px)') : defaultSize.h,
         zIndex,
         borderRadius: full ? 0 : 12,
         background: '#111119',
         overflow: 'hidden',
-        border: isActive
+        border: full
+          ? 'none'
+          : isActive
           ? '1px solid rgba(124,109,250,0.35)'
           : '1px solid rgba(255,255,255,0.06)',
-        boxShadow: isActive
+        boxShadow: full
+          ? 'none'
+          : isActive
           ? '0 25px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(124,109,250,0.08)'
           : '0 10px 40px rgba(0,0,0,0.35)',
         display: 'flex',
@@ -91,83 +96,131 @@ export default function Window({
       <div
         onMouseDown={handleDragStart}
         style={{
-          height: 42,
+          height: isMobile ? 38 : 42,
           background: isActive ? 'rgba(26,26,44,0.95)' : 'rgba(18,18,28,0.95)',
           backdropFilter: 'blur(12px)',
           display: 'flex',
           alignItems: 'center',
-          padding: '0 14px',
+          padding: isMobile ? '0 10px' : '0 14px',
           cursor: full ? 'default' : 'grab',
           userSelect: 'none',
           flexShrink: 0,
           borderBottom: '1px solid rgba(255,255,255,0.06)',
         }}
       >
-        {/* Traffic lights */}
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          {trafficLights.map((btn, i) => (
+        {isMobile ? (
+          /* Mobile: back button + title */
+          <>
             <button
-              key={i}
               className="win-btn"
               onClick={(e) => {
                 e.stopPropagation()
-                btn.action()
+                onClose()
               }}
               style={{
-                width: 13,
-                height: 13,
-                borderRadius: '50%',
-                background: isActive ? btn.bg : 'rgba(255,255,255,0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+                background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                transition: 'transform 0.15s, background 0.2s',
+                color: color,
+                fontSize: '0.76rem',
+                fontFamily: "'DM Sans', sans-serif",
+                padding: '4px 8px',
+                borderRadius: 6,
               }}
-              onMouseEnter={(e) => {
-                e.target.style.transform = 'scale(1.25)'
-                e.target.style.background = btn.hoverBg
+            >
+              <ArrowLeft size={16} />
+            </button>
+            <div
+              style={{
+                flex: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 6,
               }}
-              onMouseLeave={(e) => {
-                e.target.style.transform = 'scale(1)'
-                e.target.style.background = isActive ? btn.bg : 'rgba(255,255,255,0.15)'
+            >
+              {Icon && <Icon size={13} style={{ color, opacity: 0.8 }} />}
+              <span
+                style={{
+                  fontSize: '0.78rem',
+                  color: '#e8e8f0',
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontWeight: 600,
+                }}
+              >
+                {title}
+              </span>
+            </div>
+            <div style={{ width: 40 }} />
+          </>
+        ) : (
+          /* Desktop: traffic lights + title */
+          <>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+              {trafficLights.map((btn, i) => (
+                <button
+                  key={i}
+                  className="win-btn"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    btn.action()
+                  }}
+                  style={{
+                    width: 13,
+                    height: 13,
+                    borderRadius: '50%',
+                    background: isActive ? btn.bg : 'rgba(255,255,255,0.15)',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'transform 0.15s, background 0.2s',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.transform = 'scale(1.25)'
+                    e.target.style.background = btn.hoverBg
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.transform = 'scale(1)'
+                    e.target.style.background = isActive
+                      ? btn.bg
+                      : 'rgba(255,255,255,0.15)'
+                  }}
+                />
+              ))}
+            </div>
+            <div
+              style={{
+                flex: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 7,
+                marginRight: 54,
               }}
-            />
-          ))}
-        </div>
-
-        {/* Icon + Title */}
-        <div
-          style={{
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 7,
-            marginRight: 54,
-          }}
-        >
-          {Icon && <Icon size={13} style={{ color, opacity: 0.8 }} />}
-          <span
-            style={{
-              fontSize: '0.76rem',
-              color: isActive ? '#e8e8f0' : '#555566',
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 500,
-              letterSpacing: '0.01em',
-            }}
-          >
-            {title}
-          </span>
-        </div>
+            >
+              {Icon && <Icon size={13} style={{ color, opacity: 0.8 }} />}
+              <span
+                style={{
+                  fontSize: '0.76rem',
+                  color: isActive ? '#e8e8f0' : '#555566',
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontWeight: 500,
+                  letterSpacing: '0.01em',
+                }}
+              >
+                {title}
+              </span>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Content */}
       <div
         className="os-window-content"
-        style={{
-          flex: 1,
-          overflow: 'auto',
-          background: '#0e0e18',
-        }}
+        style={{ flex: 1, overflow: 'auto', background: '#0e0e18' }}
       >
         {children}
       </div>

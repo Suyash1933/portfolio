@@ -111,12 +111,8 @@ export default function AboutWindow() {
 
       {/* Stats grid */}
       <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: 8,
-          marginBottom: 22,
-        }}
+        className="os-stats-grid"
+        style={{ marginBottom: 22 }}
       >
         {stats.map(({ label, value }) => (
           <div
@@ -150,7 +146,7 @@ export default function AboutWindow() {
       </div>
 
       {/* Social links */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8 }}>
+      <div className="os-social-grid">
         {socials.map(({ icon: Icon, label, href, color }) => (
           <a
             key={label}

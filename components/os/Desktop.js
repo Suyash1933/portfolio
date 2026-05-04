@@ -1,5 +1,5 @@
 'use client'
-import { useState, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { User, Code2, Briefcase, Cpu, Mail, Monitor } from 'lucide-react'
 import MenuBar from './MenuBar'
 import Dock from './Dock'
@@ -59,10 +59,18 @@ const APP_CONFIG = [
 ]
 
 export default function Desktop({ onSwitchView }) {
-  const [openWindows, setOpenWindows] = useState({ about: true })
-  const [activeWindow, setActiveWindow] = useState('about')
-  const [zIndices, setZIndices] = useState({ about: 10 })
+  const [openWindows, setOpenWindows] = useState({})
+  const [activeWindow, setActiveWindow] = useState(null)
+  const [zIndices, setZIndices] = useState({})
   const [zCounter, setZCounter] = useState(11)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   const focusWindow = useCallback((id) => {
     setZCounter((prev) => {
@@ -101,22 +109,24 @@ export default function Desktop({ onSwitchView }) {
         fontFamily: "'DM Sans', sans-serif",
       }}
     >
-        {/* ===== LAPTOP FRAME ===== */}
-        <div
-          style={{
-            width: 'calc(100% - 16px)',
-            height: 'calc(100% - 16px)',
-            borderRadius: 22,
-            overflow: 'hidden',
-            background: '#0c0c0c',
-            border: '3px solid #585894',
-            display: 'flex',
-            flexDirection: 'column',
-            boxShadow:
-              '0 0 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.04)',
-          }}
-        >
-          {/* TOP BEZEL — camera notch */}
+      {/* LAPTOP FRAME */}
+      <div
+        style={{
+          width: isMobile ? '100%' : 'calc(100% - 16px)',
+          height: isMobile ? '100%' : 'calc(100% - 16px)',
+          borderRadius: isMobile ? 0 : 22,
+          overflow: 'hidden',
+          background: '#0c0c0c',
+          border: isMobile ? 'none' : '3px solid #585894',
+          display: 'flex',
+          flexDirection: 'column',
+          boxShadow: isMobile
+            ? 'none'
+            : '0 0 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.04)',
+        }}
+      >
+        {/* TOP BEZEL — hidden on mobile */}
+        {!isMobile && (
           <div
             style={{
               height: 34,
@@ -139,25 +149,26 @@ export default function Desktop({ onSwitchView }) {
               }}
             />
           </div>
+        )}
 
-          {/* SCREEN — wallpaper + all OS content */}
-          <div
-            data-os-screen
-            style={{
-              flex: 1,
-              position: 'relative',
-              overflow: 'hidden',
-              backgroundImage: "url('/wallpaper.png')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundColor: '#0a0a18',
-              transition: 'filter 0.3s ease',
-            }}
-          >
-            {/* Menu bar */}
-            <MenuBar />
+        {/* SCREEN */}
+        <div
+          data-os-screen
+          style={{
+            flex: 1,
+            position: 'relative',
+            overflow: 'hidden',
+            backgroundImage: "url('/wallpaper.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundColor: '#0a0a18',
+            transition: 'filter 0.3s ease',
+          }}
+        >
+          <MenuBar />
 
-            {/* Desktop icon — switch to plain view */}
+          {/* Desktop icon — switch to plain view */}
+          {!isMobile && (
             <button
               onClick={onSwitchView}
               style={{
@@ -211,40 +222,42 @@ export default function Desktop({ onSwitchView }) {
                 Plain View
               </span>
             </button>
+          )}
 
-            {/* Windows */}
-            {APP_CONFIG.map((app) => {
-              const Content = app.component
-              return (
-                openWindows[app.id] && (
-                  <Window
-                    key={app.id}
-                    title={app.title}
-                    icon={app.icon}
-                    color={app.color}
-                    isActive={activeWindow === app.id}
-                    onClose={() => closeWindow(app.id)}
-                    onFocus={() => focusWindow(app.id)}
-                    zIndex={zIndices[app.id] || 1}
-                    defaultPos={app.defaultPos}
-                    defaultSize={app.defaultSize}
-                  >
-                    <Content />
-                  </Window>
-                )
+          {/* Windows */}
+          {APP_CONFIG.map((app) => {
+            const Content = app.component
+            return (
+              openWindows[app.id] && (
+                <Window
+                  key={app.id}
+                  title={app.title}
+                  icon={app.icon}
+                  color={app.color}
+                  isActive={activeWindow === app.id}
+                  onClose={() => closeWindow(app.id)}
+                  onFocus={() => focusWindow(app.id)}
+                  zIndex={zIndices[app.id] || 1}
+                  defaultPos={app.defaultPos}
+                  defaultSize={app.defaultSize}
+                >
+                  <Content />
+                </Window>
               )
-            })}
+            )
+          })}
 
-            {/* Dock */}
-            <Dock
-              apps={APP_CONFIG}
-              openWindows={openWindows}
-              activeWindow={activeWindow}
-              onOpen={openWindow}
-            />
-          </div>
+          <Dock
+            apps={APP_CONFIG}
+            openWindows={openWindows}
+            activeWindow={activeWindow}
+            onOpen={openWindow}
+            onSwitchView={isMobile ? onSwitchView : null}
+          />
+        </div>
 
-          {/* BOTTOM BEZEL — name */}
+        {/* BOTTOM BEZEL — hidden on mobile */}
+        {!isMobile && (
           <div
             style={{
               height: 30,
@@ -268,7 +281,8 @@ export default function Desktop({ onSwitchView }) {
               Suyash Mishra
             </span>
           </div>
-        </div>
+        )}
+      </div>
     </div>
   )
 }

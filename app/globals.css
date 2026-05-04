@@ -270,3 +270,83 @@ body {
 .os-window-content::-webkit-scrollbar-thumb:hover {
   background: rgba(124, 109, 250, 0.4);
 }
+
+/* OS View — window content layouts */
+.os-sidebar-layout {
+  display: flex;
+  height: 100%;
+}
+.os-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.015);
+  overflow-y: auto;
+  padding: 8px;
+}
+.os-detail-panel {
+  flex: 1;
+  padding: 24px 28px;
+  overflow-y: auto;
+}
+.os-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.os-social-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.os-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+}
+.os-profiles-row {
+  display: flex;
+  gap: 8px;
+}
+
+/* OS Mobile overrides */
+@media (max-width: 768px) {
+  .os-sidebar-layout {
+    flex-direction: column;
+  }
+  .os-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    max-height: 120px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 4px;
+    padding: 8px 8px;
+  }
+  .os-sidebar > div:first-child {
+    display: none; /* hide label header */
+  }
+  .os-sidebar button {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .os-detail-panel {
+    padding: 16px 18px;
+  }
+  .os-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .os-social-grid {
+    grid-template-columns: 1fr;
+  }
+  .os-skills-grid {
+    grid-template-columns: 1fr;
+  }
+  .os-profiles-row {
+    flex-direction: column;
+  }
+}

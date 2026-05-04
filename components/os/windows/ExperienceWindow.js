@@ -54,18 +54,9 @@ export default function ExperienceWindow() {
   const exp = experiences[active]
 
   return (
-    <div style={{ display: 'flex', height: '100%', fontFamily: "'DM Sans', sans-serif" }}>
+    <div className="os-sidebar-layout" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       {/* Sidebar */}
-      <div
-        style={{
-          width: 200,
-          flexShrink: 0,
-          borderRight: '1px solid rgba(255,255,255,0.06)',
-          background: 'rgba(255,255,255,0.015)',
-          padding: 8,
-          overflowY: 'auto',
-        }}
-      >
+      <div className="os-sidebar">
         <div
           style={{
             padding: '8px 10px 12px',
@@ -121,7 +112,7 @@ export default function ExperienceWindow() {
       </div>
 
       {/* Detail panel */}
-      <div style={{ flex: 1, padding: '24px 28px', overflowY: 'auto' }}>
+      <div className="os-detail-panel">
         {/* Header */}
         <div style={{ marginBottom: 20 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
