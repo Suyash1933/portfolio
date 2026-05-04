@@ -250,3 +250,23 @@ body {
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   transition: width 1.5s ease;
 }
+
+/* OS View */
+@keyframes osFloat {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, -20px); }
+}
+
+.os-window-content::-webkit-scrollbar {
+  width: 5px;
+}
+.os-window-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.os-window-content::-webkit-scrollbar-thumb {
+  background: rgba(124, 109, 250, 0.25);
+  border-radius: 4px;
+}
+.os-window-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 109, 250, 0.4);
+}
