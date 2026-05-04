@@ -11,7 +11,7 @@ import Footer from '../components/Footer'
 import Desktop from '../components/os/Desktop'
 
 export default function Home() {
-  const [view, setView] = useState('plain')
+  const [view, setView] = useState('os')
 
   if (view === 'os') {
     return <Desktop onSwitchView={() => setView('plain')} />
