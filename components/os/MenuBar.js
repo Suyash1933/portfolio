@@ -89,7 +89,7 @@ export default function MenuBar() {
         top: 0,
         left: 0,
         right: 0,
-        height: 28,
+        height: 34,
         zIndex: 999999,
         background: 'rgba(16,16,24,0.82)',
         backdropFilter: 'blur(24px)',
@@ -128,7 +128,7 @@ export default function MenuBar() {
         </div>
         {!isMobile && (
           <span style={{ fontWeight: 600, letterSpacing: '0.01em' }}>
-            Suyash Mishra
+            {/* Suyash Mishra */}
           </span>
         )}
       </div>
@@ -170,11 +170,11 @@ export default function MenuBar() {
             background: showBatteryMenu ? 'rgba(255,255,255,0.1)' : 'none',
             border: 'none',
             cursor: 'pointer',
-            color: '#a0a0b8',
-            padding: '2px 6px',
+            color: '#d2d2de',
+            padding: '2px 5px',
             borderRadius: 4,
             transition: 'background 0.15s',
-            fontSize: isMobile ? '0.68rem' : '0.88rem',
+            fontSize: isMobile ? '0.68rem' : '0.98rem',
           }}
           onMouseEnter={(e) => {
             if (!showBatteryMenu)
@@ -184,7 +184,7 @@ export default function MenuBar() {
             if (!showBatteryMenu) e.currentTarget.style.background = 'none'
           }}
         >
-          <BatteryIcon size={isMobile ? 14 : 18} style={{ color: batteryColor }} />
+          <BatteryIcon size={isMobile ? 14 : 20} style={{ color: batteryColor }} />
           <span style={{ fontWeight: 500, color: batteryColor }}>
             {batteryLevel}%
           </span>

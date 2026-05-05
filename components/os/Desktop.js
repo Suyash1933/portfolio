@@ -117,7 +117,7 @@ export default function Desktop({ onSwitchView }) {
           borderRadius: isMobile ? 0 : 22,
           overflow: 'hidden',
           background: '#0c0c0c',
-          border: isMobile ? 'none' : '3px solid #585894',
+          border: isMobile ? 'none' : '3px solid #949496',
           display: 'flex',
           flexDirection: 'column',
           boxShadow: isMobile
@@ -129,7 +129,7 @@ export default function Desktop({ onSwitchView }) {
         {!isMobile && (
           <div
             style={{
-              height: 34,
+              height: 38,
               background: '#0c0c0c',
               display: 'flex',
               alignItems: 'center',
@@ -140,12 +140,12 @@ export default function Desktop({ onSwitchView }) {
           >
             <div
               style={{
-                width: 10,
-                height: 10,
+                width: 8,
+                height: 8,
                 borderRadius: '50%',
-                background: '#1a1a24',
-                border: '1.5px solid #2a2a38',
-                boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.6)',
+                background: '#111112',
+                border: '1.5px solid #2e2e2e',
+                boxShadow: 'inset 0 1px 3px rgba(50, 50, 50, 0.6)',
               }}
             />
           </div>
@@ -260,8 +260,8 @@ export default function Desktop({ onSwitchView }) {
         {!isMobile && (
           <div
             style={{
-              height: 30,
-              background: '#0c0c0c',
+              height: 38,
+              background: '#151414',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
