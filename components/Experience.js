@@ -4,6 +4,23 @@ import { Briefcase, ExternalLink, ChevronRight, Award } from 'lucide-react'
 
 const experiences = [
   {
+    company: 'SwasthiQ',
+    role: 'Software Engineering Intern',
+    period: 'Remote',
+    type: 'Full-Stack',
+    color: '#00d9ff',
+    tech: ['Next.js', 'Python', 'FastAPI', 'PostgreSQL', 'AI-scribe'],
+    description:
+      'Worked on a healthcare SaaS platform powering AI-driven clinical workflows for clinics and hospitals. Owned the feature flag infrastructure end-to-end — from database schema design to middleware enforcement — enabling the platform to serve both free-tier and premium customers across hybrid and cloud deployments.',
+    points: [
+      'Built a feature flag system in FastAPI for hybrid and cloud deployments, enabling controlled access to premium features across multiple clinics and healthcare environments.',
+      'Designed and implemented database schema with Alembic migrations to efficiently manage feature entitlements in a scalable and production-ready multi-tenant architecture.',
+      'Developed decorator-based middleware to enforce feature access with proper HTTP responses and admin APIs for dynamic feature flag management and secure access control.',
+      'Integrated and debugged Google OAuth using AWS Cognito, ensuring seamless authentication flows while resolving staging configuration issues and improving login reliability.',
+      'Connected frontend with backend APIs, resolved CORS and routing problems, and implemented smoke tests to ensure reliable end-to-end system validation and stability.',
+    ],
+  },
+  {
     company: 'Tech Weave Labs',
     role: 'Software Engineering Intern',
     period: 'Jan 2026 – Mar 2026',
@@ -11,11 +28,15 @@ const experiences = [
     color: '#7c6dfa',
     tech: ['React', 'Node.js', 'Express.js', 'PostgreSQL', 'WebSockets', 'Whisper API'],
     certificate: 'https://example.com/certificate-tech-weave-labs',
+    description:
+      'Built a production-grade Hospital Management System from the ground up, serving three distinct user roles — Admin, Doctor, and Patient. The system streamlined clinical operations with real-time queue management, AI-powered prescription automation, and a comprehensive analytics dashboard for hospital-wide visibility.',
     points: [
       'Built a full-stack Hospital Management System using React, Node.js, Express, and PostgreSQL, supporting seamless workflows for Admin, Doctors, and Patients.',
       'Designed a real-time OPD queue system using WebSockets to reduce wait time and improve patient flow and doctor efficiency.',
       'Integrated AI-based speech-to-text prescriptions using Whisper API to automate medicine entry and clinical workflows.',
       'Developed secure REST APIs with role-based authentication and notifications for scalable and reliable operations.',
+      'Implemented appointment scheduling with automated email/SMS reminders, reducing patient no-show rates.',
+      'Built an admin analytics dashboard with real-time metrics for bed occupancy, department load, and patient throughput.',
     ],
   },
   {
@@ -26,11 +47,15 @@ const experiences = [
     color: '#fa6d8f',
     tech: ['Java', 'SQLite', 'JSON Serialization', 'SQL', 'CLI'],
     certificate: 'https://drive.google.com/file/d/1ZvjecF6VuliMf-zh3k_XPrrVWGm8tsHx/view?usp=sharing',
+    description:
+      'Designed and built a Native Durable Execution Engine from scratch — inspired by systems like Temporal and Cadence — that enables long-running workflows to survive process crashes and resume exactly where they left off without replaying completed steps. Achieved zero data loss across 500+ simulated crash-recovery test runs.',
     points: [
       'Built a Native Durable Execution Engine inspired by Temporal/Cadence, enabling workflows to resume from failure without re-running completed side effects.',
       'Implemented a generic Step primitive with SQLite-backed memoization and logical sequence tracking for loops and conditionals.',
       'Enabled thread-safe parallel step execution, handling SQLITE BUSY errors and ensuring atomic RDBMS writes.',
       'Developed a CLI workflow runner to simulate crash recovery and validate durability across restarts.',
+      'Designed a JSON-based serialization layer for persisting workflow state snapshots across process boundaries.',
+      'Achieved zero data loss during simulated crash-recovery scenarios across 500+ test workflow executions.',
     ],
   },
   {
@@ -41,10 +66,14 @@ const experiences = [
     color: '#6dfabd',
     tech: ['Python', 'Pandas', 'NumPy', 'Scikit-Learn', 'LSTM', 'Jupyter'],
     certificate: 'https://drive.google.com/file/d/1aRrid7dTbeYx1q8pGvieV3J1PC5tmGxU/view?usp=sharing',
+    description:
+      'Developed a deep learning forecasting pipeline for cultivated-meat production trends using LSTM networks. The model improved prediction accuracy by 18% and stability by 20% through rigorous feature engineering, hyperparameter tuning, and rolling-window cross-validation — delivering actionable insights that directly informed stakeholder scaling decisions.',
     points: [
       'Built an LSTM-based time series model to forecast cultivated-meat production trends, improving accuracy by 18%.',
       'Performed preprocessing, feature engineering, and hyperparameter tuning using Pandas/NumPy with RMSE and MAE evaluation, increasing model stability by 20%.',
       'Visualized model outputs in Jupyter Notebook to support data-driven production analysis and decision-making.',
+      'Implemented rolling-window cross-validation to prevent data leakage and ensure robust out-of-sample performance.',
+      'Delivered a final report with actionable insights that informed production scaling decisions for stakeholders.',
     ],
   },
 ]
@@ -155,6 +184,21 @@ export default function Experience() {
                     </div>
 
                     <div className="glow-line mb-5" style={{ opacity: 0.2 }} />
+
+                    {/* Description */}
+                    {exp.description && (
+                      <p
+                        style={{
+                          color: 'var(--text)',
+                          fontSize: '0.88rem',
+                          lineHeight: 1.75,
+                          marginBottom: '20px',
+                          opacity: 0.85,
+                        }}
+                      >
+                        {exp.description}
+                      </p>
+                    )}
 
                     <ul className="flex flex-col gap-3 mb-5">
                       {exp.points.map((pt, j) => (

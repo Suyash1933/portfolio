@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Monitor } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
@@ -12,6 +12,36 @@ import Desktop from '../components/os/Desktop'
 
 export default function Home() {
   const [view, setView] = useState('os')
+  const [loading, setLoading] = useState(true)
+  const [fadeOut, setFadeOut] = useState(false)
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setFadeOut(true), 2200)
+    const t2 = setTimeout(() => setLoading(false), 2800)
+    return () => { clearTimeout(t1); clearTimeout(t2) }
+  }, [])
+
+  if (loading) {
+    return (
+      <div className={`loader-screen ${fadeOut ? 'fade-out' : ''}`}>
+        <div className="loader-logo">
+          <div className="loader-ring" />
+          <div className="loader-ring" />
+          <div className="loader-ring" />
+          <div className="loader-diamond" />
+          <div className="loader-dot" />
+          <div className="loader-bracket" />
+          <div className="loader-bracket" />
+          <div className="loader-bracket" />
+          <div className="loader-bracket" />
+        </div>
+        <div className="loader-name">Suyash Mishra</div>
+        <div className="loader-bar-track">
+          <div className="loader-bar-fill" />
+        </div>
+      </div>
+    )
+  }
 
   if (view === 'os') {
     return <Desktop onSwitchView={() => setView('plain')} />
@@ -32,11 +62,11 @@ export default function Home() {
           gap: 8,
           padding: '10px 20px',
           borderRadius: 12,
-          background: 'rgba(17,17,24,0.85)',
+          background: 'rgba(115, 115, 231, 0.85)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(156, 156, 159, 0.25)',
-          color: '#95959b',
+          border: '1px solid rgba(158, 158, 215, 0.25)',
+          color: '#c3c3c8',
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: '0.75rem',
           cursor: 'pointer',

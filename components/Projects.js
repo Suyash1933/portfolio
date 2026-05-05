@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import { Code2, ExternalLink, Github, Users, Trophy, ChevronDown, ChevronUp } from 'lucide-react'
+import { Code2, ExternalLink, Github, Users, Trophy, ChevronDown, ChevronUp, ChevronRight } from 'lucide-react'
 
 const projects = [
   {
@@ -9,6 +9,12 @@ const projects = [
     description:
       'A full-stack contest platform for structured team-based competitive programming practice. Features automated contest generation, interactive dashboards, and real-time analytics.',
     tech: ['Next.js', 'MongoDB', 'Google OAuth 2.0', 'REST API'],
+    bullets: [
+      'Automated contest generation with custom problem sets from Codeforces API',
+      'Real-time leaderboard and performance analytics across team members',
+      'Google OAuth 2.0 authentication with role-based access control',
+      '4 interactive dashboards for contest management, standings, and progress tracking',
+    ],
     highlights: [
       { icon: Users, value: '110+', label: 'Active Users' },
       { icon: Trophy, value: '540+', label: 'Contests Hosted' },
@@ -25,6 +31,12 @@ const projects = [
     description:
       'A comprehensive AI workspace built with Next.js and Clerk featuring 6 specialized tools: image generation, video generation, asset enhancement, Nano Banana Pro, video lipsync, and motion transfer. Implements ChatGPT-style sessions with persistent history, normalized session titles, and per-user session management with Prisma.',
     tech: ['Next.js', 'Clerk', 'Prisma', 'Gemini', 'TypeScript'],
+    bullets: [
+      'ChatGPT-style session management with draft pattern to avoid empty DB records',
+      'Per-user session persistence with automatic title derivation from user input',
+      'Shared REST session endpoints + tool-specific generation routes with centralized service layer',
+      'TypeScript strict mode with full type-checking compliance across the codebase',
+    ],
     highlights: [
       { icon: Code2, value: '6', label: 'AI Workspaces' },
       { icon: Users, value: '∞', label: 'Per-User History' },
@@ -41,6 +53,12 @@ const projects = [
     description:
       'An AI-powered career guidance platform with personalized roadmaps, skill-gap analysis, and automated resume evaluation. Built with async processing to reduce evaluation time by 50%.',
     tech: ['Next.js', 'Clerk', 'Neon (PostgreSQL)', 'Inngest', 'AgentKit'],
+    bullets: [
+      'AI-driven personalized career roadmaps with skill-gap analysis and actionable steps',
+      'Automated resume evaluation with structured scoring and improvement suggestions',
+      'Async background processing via Inngest for non-blocking evaluation workflows',
+      'Next.js App Router with TypeScript and Geist font optimization for production deployment',
+    ],
     highlights: [
       { icon: Users, value: '30+', label: 'Active Users' },
       { icon: Code2, value: '99.9%', label: 'Uptime' },
@@ -57,6 +75,12 @@ const projects = [
     description:
       'An AI-powered web application that provides instant, structured code reviews using Google Gemini. Analyzes code in JavaScript, Python, Java, C++, and Go, highlighting good practices, identifying bugs, and providing actionable improvements for cleaner, faster, and more maintainable code.',
     tech: ['React.js', 'Express.js', 'Google Gemini API', 'Node.js', 'Axios'],
+    bullets: [
+      'Structured output with good practices, bad practices, optimization hints, and improved code examples',
+      'Language-specific best practice analysis for JavaScript, Python, Java, C++, and Go',
+      'React frontend with syntax highlighting (highlight.js) and markdown rendering for reviews',
+      'Express backend with environment variable API key protection and lightweight response cycle',
+    ],
     highlights: [
       { icon: Code2, value: '5', label: 'Languages' },
       { icon: Trophy, value: 'Real-time', label: 'Analysis' },
@@ -72,6 +96,12 @@ const projects = [
     description:
       'A Windows-friendly Python project that transforms plain text into emotionally aware speech. Detects emotion (positive, negative, concerned, inquisitive, surprised, neutral) using hybrid VADER sentiment analysis, maps emotions to vocal parameters (pitch, rate, volume), and generates playable .wav files. Features CLI, FastAPI web interface with emotion-aware theming, real-time audio player, and modular architecture for easy TTS engine swapping.',
     tech: ['Python', 'FastAPI','React', 'VADER', 'SSML'],
+    bullets: [
+      'Hybrid NLP approach: VADER sentiment + custom keyword matching + phrase boosting + negation handling',
+      'Dynamic vocal modulation adjusting pitch, rate, and volume based on emotion intensity (0-1 scale)',
+      'Three interfaces: CLI, REST API (FastAPI), and interactive web UI with emotion-aware theming',
+      'Modular architecture with pluggable TTS layer — no third-party API key dependency',
+    ],
     highlights: [
       { icon: Trophy, value: '6', label: 'Emotions' },
       { icon: Code2, value: 'Hybrid', label: 'Detection' },
@@ -181,6 +211,22 @@ export default function Projects() {
                     <p style={{ color: 'var(--muted)', lineHeight: 1.7, fontSize: '0.9rem', maxWidth: '520px' }}>
                       {proj.description}
                     </p>
+
+                    {/* Bullet points */}
+                    {proj.bullets && (
+                      <ul className="flex flex-col gap-2 mt-4" style={{ maxWidth: '520px' }}>
+                        {proj.bullets.map((bullet, bi) => (
+                          <li
+                            key={bi}
+                            className="flex gap-2 text-sm"
+                            style={{ color: 'var(--muted)', lineHeight: 1.6 }}
+                          >
+                            <ChevronRight size={13} style={{ color: proj.color, flexShrink: 0, marginTop: '3px' }} />
+                            {bullet}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
 
                     {/* Tech */}
                     <div className="flex flex-wrap gap-2 mt-5">

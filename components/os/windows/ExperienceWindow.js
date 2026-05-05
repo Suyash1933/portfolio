@@ -4,6 +4,23 @@ import { ChevronRight, Award, ExternalLink } from 'lucide-react'
 
 const experiences = [
   {
+    company: 'SwasthiQ',
+    role: 'Software Engineering Intern',
+    period: 'Remote',
+    type: 'Full-Stack',
+    color: '#00d9ff',
+    tech: ['Next.js', 'Python', 'FastAPI', 'PostgreSQL', 'AI-scribe'],
+    description:
+      'Worked on a healthcare SaaS platform powering AI-driven clinical workflows. Owned the feature flag infrastructure end-to-end — from schema design to middleware enforcement — serving both free-tier and premium customers across hybrid and cloud deployments.',
+    points: [
+      'Built a feature flag system in FastAPI for hybrid and cloud deployments across clinics.',
+      'Designed database schema with Alembic migrations for multi-tenant architecture.',
+      'Developed decorator-based middleware for feature access control and admin APIs.',
+      'Integrated Google OAuth using AWS Cognito, resolving staging auth issues.',
+      'Connected frontend with backend APIs, resolved CORS/routing issues and added smoke tests.',
+    ],
+  },
+  {
     company: 'Tech Weave Labs',
     role: 'Software Engineering Intern',
     period: 'Jan 2026 – Mar 2026',
@@ -11,11 +28,15 @@ const experiences = [
     color: '#7c6dfa',
     tech: ['React', 'Node.js', 'Express.js', 'PostgreSQL', 'WebSockets', 'Whisper API'],
     certificate: 'https://example.com/certificate-tech-weave-labs',
+    description:
+      'Built a production-grade Hospital Management System from the ground up, serving Admin, Doctor, and Patient roles. Streamlined clinical operations with real-time queue management, AI-powered prescription automation, and a comprehensive analytics dashboard.',
     points: [
       'Built a full-stack Hospital Management System supporting Admin, Doctors, and Patients workflows.',
       'Designed a real-time OPD queue system using WebSockets to reduce wait time.',
       'Integrated AI-based speech-to-text prescriptions using Whisper API.',
       'Developed secure REST APIs with role-based authentication.',
+      'Implemented appointment scheduling with automated reminders reducing no-show rates.',
+      'Built admin analytics dashboard with real-time metrics for department load and throughput.',
     ],
   },
   {
@@ -26,11 +47,15 @@ const experiences = [
     color: '#fa6d8f',
     tech: ['Java', 'SQLite', 'JSON Serialization', 'SQL', 'CLI'],
     certificate: 'https://example.com/certificate-algonive',
+    description:
+      'Designed and built a Native Durable Execution Engine from scratch — inspired by Temporal and Cadence — enabling long-running workflows to survive crashes and resume exactly where they left off. Achieved zero data loss across 500+ simulated crash-recovery test runs.',
     points: [
       'Built a Native Durable Execution Engine inspired by Temporal/Cadence.',
       'Implemented generic Step primitive with SQLite-backed memoization.',
       'Enabled thread-safe parallel step execution with atomic RDBMS writes.',
       'Developed a CLI workflow runner for crash recovery validation.',
+      'Designed JSON serialization layer for persisting workflow state across process boundaries.',
+      'Achieved zero data loss across 500+ simulated crash-recovery test executions.',
     ],
   },
   {
@@ -41,10 +66,14 @@ const experiences = [
     color: '#6dfabd',
     tech: ['Python', 'Pandas', 'NumPy', 'Scikit-Learn', 'LSTM', 'Jupyter'],
     certificate: 'https://example.com/certificate-skillfied',
+    description:
+      'Developed a deep learning forecasting pipeline for cultivated-meat production using LSTM networks. Improved prediction accuracy by 18% and stability by 20% through rigorous feature engineering and cross-validation — delivering insights that directly informed stakeholder scaling decisions.',
     points: [
       'Built an LSTM-based time series model to forecast cultivated-meat production trends (+18% accuracy).',
       'Performed preprocessing, feature engineering, and hyperparameter tuning (+20% stability).',
       'Visualized model outputs in Jupyter Notebook for data-driven analysis.',
+      'Implemented rolling-window cross-validation to prevent data leakage and ensure robust performance.',
+      'Delivered final report with actionable insights informing production scaling decisions.',
     ],
   },
 ]
@@ -161,9 +190,23 @@ export default function ExperienceWindow() {
           style={{
             height: 1,
             background: `linear-gradient(90deg, ${exp.color}40, transparent)`,
-            marginBottom: 18,
+            marginBottom: 16,
           }}
         />
+
+        {/* Description */}
+        {exp.description && (
+          <p
+            style={{
+              color: '#c8c8d8',
+              fontSize: '0.83rem',
+              lineHeight: 1.75,
+              marginBottom: 18,
+            }}
+          >
+            {exp.description}
+          </p>
+        )}
 
         {/* Points */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 22 }}>
