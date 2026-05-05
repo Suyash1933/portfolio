@@ -105,32 +105,21 @@ export default function MenuBar() {
         color: '#e8e8f0',
       }}
     >
-      {/* Left: Logo + name (name hidden on mobile) */}
+      {/* Left: Apple icon */}
       <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 8 : 14, flex: 1 }}>
-        <div
+        <img
+          src="/icon-apple.png"
+          alt=""
           style={{
-            width: 16,
-            height: 16,
-            borderRadius: 4,
-            background: 'linear-gradient(135deg, #7c6dfa, #fa6d8f)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '0.4rem',
-            fontWeight: 800,
-            color: 'white',
-            fontFamily: 'Syne, sans-serif',
-            letterSpacing: '-0.02em',
+            width: 15,
+            height: 15,
+            objectFit: 'contain',
             flexShrink: 0,
+            filter: 'brightness(0) invert(1)',
+            opacity: 0.9,
           }}
-        >
-          SM
-        </div>
-        {!isMobile && (
-          <span style={{ fontWeight: 600, letterSpacing: '0.01em' }}>
-            {/* Suyash Mishra */}
-          </span>
-        )}
+          draggable={false}
+        />
       </div>
 
       {/* Center: Date + Time */}
