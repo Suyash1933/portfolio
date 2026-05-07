@@ -1,7 +1,7 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Suyash Mishra — Software Developer & AI Enthusiast',
+  title: 'Suyash Mishra — Software Developer & Aspiring AI Engineer',
   description: 'Full-Stack Developer & Software Engineer building scalable web applications and AI-powered systems.',
   keywords: 'Suyash Mishra, Software Developer, React, Next.js, Node.js',
 }
