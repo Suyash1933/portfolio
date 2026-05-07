@@ -10,10 +10,10 @@ const info = [
 ]
 
 const stats = [
-  { label: 'Internships', value: '3' },
-  { label: 'Live Projects', value: '2+' },
+  { label: 'Internships', value: '4' },
+  { label: 'Live Projects', value: '4+' },
   { label: 'Users', value: '140+' },
-  { label: 'Profiles', value: '3' },
+  { label: 'Profiles', value: '4' },
 ]
 
 const socials = [
