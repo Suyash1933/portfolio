@@ -2,7 +2,7 @@
 import { Github, Linkedin, Mail, Phone, ExternalLink, Radius } from 'lucide-react'
 
 const info = [
-  { label: 'Location', value: 'Prayagraj, UP, India' },
+  { label: 'Location', value: 'Rewa, Madhya Pradesh, India' },
   { label: 'Education', value: 'B.Tech IT, IIIT Prayagraj' },
   { label: 'Batch', value: '2022 – 2026' },
   { label: 'CGPA', value: '8.10 / 10.0' },
