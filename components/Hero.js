@@ -85,12 +85,12 @@ export default function Hero() {
                 className="font-mono"
                 style={{ color: 'var(--accent)', fontSize: '0.9rem', fontFamily: 'JetBrains Mono' }}
               >
-                Software Engineer &amp; Full-Stack Developer
+                Software Developer &amp; AI Enthusiast
               </p>
             </div>
 
             <p className="text-muted leading-relaxed mb-8" style={{ fontSize: '1.05rem', maxWidth: '480px' }}>
-              B.Tech IT student at IIIT Prayagraj, building scalable full-stack systems, AI-powered tools,
+              B.Tech IT student at IIIT Allahabad, building scalable full-stack systems, AI-powered tools,
               and real-time applications. Passionate about clean architecture and impactful software.
             </p>
 
