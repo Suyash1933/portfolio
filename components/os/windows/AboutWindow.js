@@ -66,7 +66,7 @@ export default function AboutWindow() {
             fontSize: '0.78rem',
           }}
         >
-          Software Engineer & Full-Stack Developer
+          Software Developer & Aspiring AI Engineer
         </p>
       </div>
 
