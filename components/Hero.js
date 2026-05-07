@@ -85,7 +85,7 @@ export default function Hero() {
                 className="font-mono"
                 style={{ color: 'var(--accent)', fontSize: '0.9rem', fontFamily: 'JetBrains Mono' }}
               >
-                Software Developer &amp; AI Enthusiast
+                Software Developer &amp; Aspiring AI Engineer
               </p>
             </div>
 
