@@ -2,18 +2,18 @@
 import { Github, Linkedin, Mail, Phone, ExternalLink, Radius } from 'lucide-react'
 
 const info = [
-  { label: 'Location', value: 'Rewa, Madhya Pradesh, India' },
+  { label: 'Location', value: 'Prayagraj, UP, India' },
   { label: 'Education', value: 'B.Tech IT, IIIT Prayagraj' },
   { label: 'Batch', value: '2022 – 2026' },
-  { label: 'CGPA', value: '8.10 / 10.0' },
+  // { label: 'CGPA', value: '8.10 / 10.0' },
   { label: 'Status', value: 'Open to Work', highlight: true },
 ]
 
 const stats = [
-  { label: 'Internships', value: '4' },
-  { label: 'Live Projects', value: '4+' },
+  { label: 'Internships', value: '3' },
+  { label: 'Live Projects', value: '2+' },
   { label: 'Users', value: '140+' },
-  { label: 'Profiles', value: '4' },
+  { label: 'Profiles', value: '3' },
 ]
 
 const socials = [
@@ -66,7 +66,7 @@ export default function AboutWindow() {
             fontSize: '0.78rem',
           }}
         >
-          Software Developer & Aspiring AI Engineer
+          Software Engineer & Full-Stack Developer
         </p>
       </div>
 
@@ -185,7 +185,7 @@ export default function AboutWindow() {
 
       {/* Resume link */}
       <a
-        href="https://drive.google.com/file/d/1VBwv3-naX5JWu5w8jvb8BLodwfMKUQLX/view?usp=sharing"
+        href="https://drive.google.com/file/d/1E5O0rV0hsjQuR5_vGg1OhlEE4f7924z2/view?usp=sharing"
         target="_blank"
         rel="noopener noreferrer"
         style={{
