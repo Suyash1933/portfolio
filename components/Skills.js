@@ -239,7 +239,7 @@ export default function Skills() {
                       B.Tech in Information Technology
                     </p>
                     <p style={{ color: 'var(--muted)', fontSize: '0.75rem', fontFamily: 'JetBrains Mono', marginTop: '4px' }}>
-                      2022 – Present · CGPA: 8.10
+                      2022 – Present
                     </p>
                   </div>
                 </div>
