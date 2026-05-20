@@ -70,7 +70,7 @@ export default function Navbar() {
               {item.label}
             </a>
           ))}
-          <a href="https://drive.google.com/file/d/1VBwv3-naX5JWu5w8jvb8BLodwfMKUQLX/view?usp=sharing" className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}>
+          <a href="https://drive.google.com/file/d/1E5O0rV0hsjQuR5_vGg1OhlEE4f7924z2/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}>
             Resume
           </a>
         </div>
@@ -101,7 +101,7 @@ export default function Navbar() {
                 {item.label}
               </a>
             ))}
-            <a href="https://drive.google.com/file/d/1VBwv3-naX5JWu5w8jvb8BLodwfMKUQLX/view?usp=sharing" className="btn-primary" style={{ width: 'fit-content' }}>
+            <a href="https://drive.google.com/file/d/1E5O0rV0hsjQuR5_vGg1OhlEE4f7924z2/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ width: 'fit-content' }}>
               Resume
             </a>
           </div>
