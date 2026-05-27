@@ -158,70 +158,121 @@ export default function Desktop({ onSwitchView }) {
             flex: 1,
             position: 'relative',
             overflow: 'hidden',
-            backgroundImage: "url('/wallpaper.png')",
+            backgroundImage: "url('/wallpaper-bg2.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundColor: '#0a0a18',
-            transition: 'filter 0.3s ease',
+            imageRendering: 'auto',
+            WebkitBackfaceVisibility: 'hidden',
+            backfaceVisibility: 'hidden',
           }}
         >
+          {/* Brightness overlay — dims without blurring the wallpaper */}
+          <div
+            data-os-brightness-overlay
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: '#000',
+              opacity: 0,
+              pointerEvents: 'none',
+              zIndex: 1,
+              transition: 'opacity 0.3s ease',
+            }}
+          />
           <MenuBar />
 
           {/* Desktop icon — switch to plain view */}
           {!isMobile && (
-            <button
-              onClick={onSwitchView}
+            <div
               style={{
                 position: 'absolute',
                 top: 48,
                 left: 20,
                 zIndex: 5,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: 7,
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: '#e8e8f0',
-                padding: 14,
-                borderRadius: 14,
-                transition: 'background 0.2s ease',
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.background = 'rgba(255,255,255,0.06)')
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.background = 'none')
-              }
             >
+              {/* Ping ring */}
               <div
                 style={{
-                  width: 56,
-                  height: 56,
-                  borderRadius: 14,
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
+                  position: 'absolute',
+                  top: 10,
+                  left: 10,
+                  width: 64,
+                  height: 64,
+                  borderRadius: 16,
+                  border: '2px solid rgba(124,109,250,0.6)',
+                  animation: 'os-ping 2s cubic-bezier(0,0,0.2,1) infinite',
+                  pointerEvents: 'none',
                 }}
-              >
-                <Monitor size={24} style={{ color: '#905895' }} />
-              </div>
-              <span
+              />
+              <button
+                onClick={onSwitchView}
                 style={{
-                  fontSize: '0.82rem',
-                  color: '#aeaec7',
-                  whiteSpace: 'nowrap',
-                  fontWeight: 600,
-                  textShadow: '0 1px 6px rgba(0,0,0,0.7)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: 8,
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: '#e8e8f0',
+                  padding: 14,
+                  borderRadius: 14,
+                  transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-3px) scale(1.08)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)'
                 }}
               >
-                Plain View
-              </span>
-            </button>
+                <div
+                  style={{
+                    width: 60,
+                    height: 60,
+                    borderRadius: 16,
+                    background: 'linear-gradient(135deg, #7c6dfa 0%, #a855f7 50%, #fa6d8f 100%)',
+                    backgroundSize: '200% 200%',
+                    animation: 'os-gradient 3s ease infinite',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 0 20px rgba(124,109,250,0.5), 0 0 50px rgba(124,109,250,0.15), 0 4px 16px rgba(0,0,0,0.3)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {/* Shimmer */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.25) 50%, transparent 60%)',
+                      backgroundSize: '200% 100%',
+                      animation: 'os-shimmer 2.5s ease-in-out infinite',
+                      pointerEvents: 'none',
+                    }}
+                  />
+                  <Monitor size={26} style={{ color: '#fff', filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.5))' }} />
+                </div>
+                <span
+                  style={{
+                    fontSize: '0.8rem',
+                    color: '#fff',
+                    whiteSpace: 'nowrap',
+                    fontWeight: 700,
+                    fontFamily: "'JetBrains Mono', monospace",
+                    letterSpacing: '0.03em',
+                    textShadow: '0 0 12px rgba(124,109,250,0.8), 0 1px 6px rgba(0,0,0,0.7)',
+                  }}
+                >
+                  Plain View
+                </span>
+              </button>
+            </div>
           )}
 
           {/* Windows */}

@@ -65,8 +65,11 @@ export default function MenuBar() {
   }, [])
 
   useEffect(() => {
-    const screen = document.querySelector('[data-os-screen]')
-    if (screen) screen.style.filter = `brightness(${brightness / 100})`
+    const overlay = document.querySelector('[data-os-brightness-overlay]')
+    if (overlay) {
+      const dimAmount = 1 - brightness / 100
+      overlay.style.opacity = dimAmount
+    }
   }, [brightness])
 
   useEffect(() => {
