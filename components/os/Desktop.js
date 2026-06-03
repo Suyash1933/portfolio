@@ -158,7 +158,7 @@ export default function Desktop({ onSwitchView }) {
             flex: 1,
             position: 'relative',
             overflow: 'hidden',
-            backgroundImage: "url('/wallpaper-bg2.png')",
+            backgroundImage: "url('/wallpaper.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundColor: '#0a0a18',
