@@ -15,9 +15,11 @@ export default function Window({
   children,
 }) {
   const [pos, setPos] = useState(defaultPos)
+  const [size, setSize] = useState(defaultSize)
   const [maximized, setMaximized] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const dragRef = useRef({ active: false, ox: 0, oy: 0 })
+  const resizeRef = useRef({ active: false, edge: null, startX: 0, startY: 0, startW: 0, startH: 0, startPosX: 0, startPosY: 0 })
   const windowRef = useRef(null)
 
   useEffect(() => {
@@ -54,6 +56,50 @@ export default function Window({
     [pos, maximized, isMobile, onFocus]
   )
 
+  const handleResizeStart = useCallback(
+    (edge) => (e) => {
+      if (maximized || isMobile) return
+      e.preventDefault()
+      e.stopPropagation()
+      onFocus?.()
+      resizeRef.current = {
+        active: true,
+        edge,
+        startX: e.clientX,
+        startY: e.clientY,
+        startW: size.w,
+        startH: size.h,
+        startPosX: pos.x,
+        startPosY: pos.y,
+      }
+
+      const onMove = (ev) => {
+        if (!resizeRef.current.active) return
+        const { edge: ed, startX, startY, startW, startH, startPosX, startPosY } = resizeRef.current
+        const dx = ev.clientX - startX
+        const dy = ev.clientY - startY
+
+        let newW = startW, newH = startH, newX = startPosX, newY = startPosY
+
+        if (ed.includes('e')) newW = Math.max(400, startW + dx)
+        if (ed.includes('w')) { newW = Math.max(400, startW - dx); newX = startPosX + (startW - newW) }
+        if (ed.includes('s')) newH = Math.max(300, startH + dy)
+        if (ed.includes('n')) { newH = Math.max(300, startH - dy); newY = startPosY + (startH - newH) }
+
+        setSize({ w: newW, h: newH })
+        setPos({ x: newX, y: newY })
+      }
+      const onUp = () => {
+        resizeRef.current.active = false
+        document.removeEventListener('mousemove', onMove)
+        document.removeEventListener('mouseup', onUp)
+      }
+      document.addEventListener('mousemove', onMove)
+      document.addEventListener('mouseup', onUp)
+    },
+    [maximized, isMobile, size, pos, onFocus]
+  )
+
   const full = isMobile || maximized
 
   const trafficLights = [
@@ -70,8 +116,8 @@ export default function Window({
         position: 'absolute',
         left: full ? 0 : pos.x,
         top: full ? 28 : pos.y,
-        width: full ? '100%' : defaultSize.w,
-        height: full ? (isMobile ? 'calc(100% - 28px - 58px)' : 'calc(100% - 28px - 76px)') : defaultSize.h,
+        width: full ? '100%' : size.w,
+        height: full ? (isMobile ? 'calc(100% - 28px - 58px)' : 'calc(100% - 28px - 76px)') : size.h,
         zIndex,
         borderRadius: full ? 0 : 12,
         background: '#111119',
@@ -224,6 +270,22 @@ export default function Window({
       >
         {children}
       </div>
+
+      {/* Resize handles — invisible edge sliders (desktop only) */}
+      {!full && !isMobile && (
+        <>
+          {/* Edges */}
+          <div onMouseDown={handleResizeStart('e')} style={{ position: 'absolute', top: 0, right: -3, width: 6, height: '100%', cursor: 'ew-resize' }} />
+          <div onMouseDown={handleResizeStart('w')} style={{ position: 'absolute', top: 0, left: -3, width: 6, height: '100%', cursor: 'ew-resize' }} />
+          <div onMouseDown={handleResizeStart('s')} style={{ position: 'absolute', bottom: -3, left: 0, width: '100%', height: 6, cursor: 'ns-resize' }} />
+          <div onMouseDown={handleResizeStart('n')} style={{ position: 'absolute', top: -3, left: 0, width: '100%', height: 6, cursor: 'ns-resize' }} />
+          {/* Corners */}
+          <div onMouseDown={handleResizeStart('se')} style={{ position: 'absolute', bottom: -4, right: -4, width: 12, height: 12, cursor: 'nwse-resize' }} />
+          <div onMouseDown={handleResizeStart('sw')} style={{ position: 'absolute', bottom: -4, left: -4, width: 12, height: 12, cursor: 'nesw-resize' }} />
+          <div onMouseDown={handleResizeStart('ne')} style={{ position: 'absolute', top: -4, right: -4, width: 12, height: 12, cursor: 'nesw-resize' }} />
+          <div onMouseDown={handleResizeStart('nw')} style={{ position: 'absolute', top: -4, left: -4, width: 12, height: 12, cursor: 'nwse-resize' }} />
+        </>
+      )}
     </div>
   )
 }

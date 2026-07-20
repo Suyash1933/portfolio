@@ -13,7 +13,7 @@ const skillGroups = [
     category: 'Frameworks & Libraries',
     icon: Globe,
     color: '#fa6d8f',
-    skills: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'Tailwind CSS', 'Scikit-Learn'],
+    skills: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'FastAPI', 'Tailwind CSS', 'Scikit-Learn'],
   },
   {
     category: 'Databases',
@@ -25,13 +25,13 @@ const skillGroups = [
     category: 'Tools & Platforms',
     icon: Wrench,
     color: '#fad96d',
-    skills: ['Git', 'GitHub', 'Postman', 'Vercel', 'Inngest', 'Clerk', 'WebSockets', 'REST APIs'],
+    skills: ['Git', 'GitHub', 'AWS', 'Postman', 'Vercel', 'Inngest', 'Clerk', 'WebSockets', 'REST APIs'],
   },
   {
     category: 'Core Concepts',
     icon: BookOpen,
     color: '#6db8fa',
-    skills: ['DSA', 'OOP', 'Operating Systems', 'DBMS', 'Artificial Intelligence', 'Machine Learning'],
+    skills: ['DSA', 'OOP', 'Operating Systems', 'DBMS', 'Artificial Intelligence', 'Machine Learning', 'DevOps', 'Software Architecture'],
   },
 ]
 

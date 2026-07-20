@@ -9,15 +9,16 @@ const experiences = [
     period: 'Remote',
     type: 'Full-Stack',
     color: '#00d9ff',
-    tech: ['Next.js', 'Python', 'FastAPI', 'PostgreSQL', 'AI-scribe'],
+    tech: ['Next.js', 'Python', 'FastAPI', 'PostgreSQL', 'AWS Lambda', 'Cognito', 'S3', 'Razorpay'],
     description:
-      'Worked on a healthcare SaaS platform powering AI-driven clinical workflows for clinics and hospitals. Owned the feature flag infrastructure end-to-end — from database schema design to middleware enforcement — enabling the platform to serve both free-tier and premium customers across hybrid and cloud deployments.',
+      'Built core modules of Kaagazy EMR — a full-stack clinical platform for Indian clinics featuring AI Scribe, Razorpay billing, role-aware onboarding, and defence-in-depth credential gating, deployed serverless on AWS.',
     points: [
-      'Built a feature flag system in FastAPI for hybrid and cloud deployments, enabling controlled access to premium features across multiple clinics and healthcare environments.',
-      'Designed and implemented database schema with Alembic migrations to efficiently manage feature entitlements in a scalable and production-ready multi-tenant architecture.',
-      'Developed decorator-based middleware to enforce feature access with proper HTTP responses and admin APIs for dynamic feature flag management and secure access control.',
-      'Integrated and debugged Google OAuth using AWS Cognito, ensuring seamless authentication flows while resolving staging configuration issues and improving login reliability.',
-      'Connected frontend with backend APIs, resolved CORS and routing problems, and implemented smoke tests to ensure reliable end-to-end system validation and stability.',
+      'Developed AI Scribe pipeline that captures live doctor-patient conversations, transcribes in real-time, and auto-generates structured SOAP notes, diagnoses, and prescriptions — reducing documentation to under 90 seconds.',
+      'Integrated Razorpay billing with trial activation (₹1), monthly/annual subscriptions (Kaagazy/Kaagazy+), per-use AI credits, and GST-compliant invoicing with webhook-driven lifecycle management.',
+      'Built role-aware onboarding — Admins provision clinics with compliance docs (GST, incorporation); Doctors upload KYC (NMC, Aadhaar) — with a smart deduplication layer that cross-references clinic and personal KYC to eliminate redundant uploads.',
+      'Implemented credential gate enforcing defence-in-depth: clinical writes locked behind PlatformAdmin-verified documents, not self-asserted role labels.',
+      'Deployed serverless on AWS Lambda via Mangum with API Gateway stage separation (dev/staging/prod), Cognito JWT auth with role claims, and S3 presigned URLs for secure, time-limited document access.',
+      'Architected multi-tenant data isolation on RDS PostgreSQL with master-registry separation for cross-tenant platform operations like KYC review and billing reconciliation.',
     ],
   },
   // {

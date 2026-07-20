@@ -9,15 +9,16 @@ const experiences = [
     period: 'Remote',
     type: 'Full-Stack',
     color: '#00d9ff',
-    tech: ['Next.js', 'Python', 'FastAPI', 'PostgreSQL', 'AI-scribe'],
+    tech: ['Next.js', 'Python', 'FastAPI', 'PostgreSQL', 'AWS Lambda', 'Cognito', 'S3', 'Razorpay'],
     description:
-      'Worked on a healthcare SaaS platform powering AI-driven clinical workflows. Owned the feature flag infrastructure end-to-end — from schema design to middleware enforcement — serving both free-tier and premium customers across hybrid and cloud deployments.',
+      'Built core modules of Kaagazy EMR — a full-stack clinical platform for Indian clinics featuring AI Scribe, Razorpay billing, role-aware onboarding, and defence-in-depth credential gating, deployed serverless on AWS.',
     points: [
-      'Built a feature flag system in FastAPI for hybrid and cloud deployments across clinics.',
-      'Designed database schema with Alembic migrations for multi-tenant architecture.',
-      'Developed decorator-based middleware for feature access control and admin APIs.',
-      'Integrated Google OAuth using AWS Cognito, resolving staging auth issues.',
-      'Connected frontend with backend APIs, resolved CORS/routing issues and added smoke tests.',
+      'Developed AI Scribe pipeline that captures live doctor-patient conversations, transcribes in real-time, and auto-generates structured SOAP notes, diagnoses, and prescriptions — reducing documentation to under 90 seconds.',
+      'Integrated Razorpay billing with trial activation (₹1), monthly/annual subscriptions (Kaagazy/Kaagazy+), per-use AI credits, and GST-compliant invoicing with webhook-driven lifecycle management.',
+      'Built role-aware onboarding — Admins provision clinics with compliance docs (GST, incorporation); Doctors upload KYC (NMC, Aadhaar) — with a smart deduplication layer that cross-references clinic and personal KYC to eliminate redundant uploads.',
+      'Implemented credential gate enforcing defence-in-depth: clinical writes locked behind PlatformAdmin-verified documents, not self-asserted role labels.',
+      'Deployed serverless on AWS Lambda via Mangum with API Gateway stage separation (dev/staging/prod), Cognito JWT auth with role claims, and S3 presigned URLs for secure, time-limited document access.',
+      'Architected multi-tenant data isolation on RDS PostgreSQL with master-registry separation for cross-tenant platform operations like KYC review and billing reconciliation.',
     ],
   },
   // {

@@ -10,7 +10,7 @@ const skillGroups = [
   {
     category: 'Frameworks & Libraries',
     color: '#fa6d8f',
-    skills: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'Tailwind CSS', 'Scikit-Learn'],
+    skills: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'FastAPI', 'Tailwind CSS', 'Scikit-Learn'],
   },
   {
     category: 'Databases',
@@ -20,22 +20,13 @@ const skillGroups = [
   {
     category: 'Tools & Platforms',
     color: '#fad96d',
-    skills: ['Git', 'GitHub', 'Postman', 'Vercel', 'Inngest', 'Clerk', 'WebSockets', 'REST APIs'],
+    skills: ['Git', 'GitHub', 'AWS', 'Postman', 'Vercel', 'Inngest', 'Clerk', 'WebSockets', 'REST APIs'],
   },
   {
     category: 'Core Concepts',
     color: '#6db8fa',
-    skills: ['DSA', 'OOP', 'Operating Systems', 'DBMS', 'AI', 'Machine Learning'],
+    skills: ['DSA', 'OOP', 'Operating Systems', 'DBMS', 'AI', 'Machine Learning', 'DevOps', 'Software Architecture'],
   },
-]
-
-const proficiency = [
-  { skill: 'React / Next.js', level: 90, color: '#7c6dfa' },
-  { skill: 'Node.js / Express', level: 85, color: '#6dfabd' },
-  { skill: 'Java', level: 80, color: '#fa6d8f' },
-  { skill: 'Python / ML', level: 75, color: '#fad96d' },
-  { skill: 'DSA & Algorithms', level: 82, color: '#6db8fa' },
-  { skill: 'Databases (SQL/NoSQL)', level: 80, color: '#ff9f43' },
 ]
 
 const codingProfiles = [
@@ -103,74 +94,6 @@ export default function SkillsWindow() {
             </div>
           </div>
         ))}
-      </div>
-
-      {/* Proficiency bars */}
-      <div
-        style={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: '0.62rem',
-          color: '#6b6b80',
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          marginBottom: 12,
-        }}
-      >
-        Proficiency
-      </div>
-
-      <div
-        style={{
-          background: 'rgba(255,255,255,0.025)',
-          border: '1px solid rgba(255,255,255,0.05)',
-          borderRadius: 12,
-          padding: '18px 20px',
-          marginBottom: 28,
-        }}
-      >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-          {proficiency.map(({ skill, level, color }) => (
-            <div key={skill}>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  marginBottom: 6,
-                }}
-              >
-                <span style={{ fontSize: '0.8rem', color: '#c0c0d0' }}>{skill}</span>
-                <span
-                  style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: '0.7rem',
-                    color,
-                  }}
-                >
-                  {level}%
-                </span>
-              </div>
-              <div
-                style={{
-                  height: 4,
-                  background: 'rgba(255,255,255,0.06)',
-                  borderRadius: 2,
-                  overflow: 'hidden',
-                }}
-              >
-                <div
-                  style={{
-                    height: '100%',
-                    width: `${level}%`,
-                    borderRadius: 2,
-                    background: `linear-gradient(90deg, ${color}, ${color}90)`,
-                    transition: 'width 1s ease',
-                  }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
 
       {/* Coding Profiles */}
