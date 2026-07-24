@@ -7,7 +7,7 @@ const skillGroups = [
     category: 'Languages',
     icon: Cpu,
     color: '#7c6dfa',
-    skills: ['C', 'C++', 'Java', 'Python', 'JavaScript'],
+    skills: ['C', 'C++', 'Java', 'Python', 'JavaScript', 'TypeScript', 'SQL', 'HTML', 'CSS'],
   },
   {
     category: 'Frameworks & Libraries',
@@ -191,7 +191,7 @@ export default function Skills() {
                   B.Tech in Information Technology
                 </p>
                 <p style={{ color: 'var(--muted)', fontSize: '0.75rem', fontFamily: 'JetBrains Mono', marginTop: '4px' }}>
-                  2022 – Present 
+                  2022 – Present
                 </p>
               </div>
             </div>

@@ -5,10 +5,10 @@ import { Github, Linkedin, Mail, ArrowDown, Code2 } from 'lucide-react'
 const TECH_MARQUEE = [
   'React.js', 'Next.js', 'Node.js', 'TypeScript', 'Java', 'Python',
   'PostgreSQL', 'MongoDB', 'WebSockets', 'REST APIs', 'Machine Learning',
-  'Express.js', 'Tailwind CSS', 'Git', 'Docker', 'Algorithms',
+  'Express.js', 'Tailwind CSS', 'Git', 'Docker', 'Algorithms', 'Dev Ops', 'AWS', 'FastAPI', 'Scikit-Learn',
   'React.js', 'Next.js', 'Node.js', 'TypeScript', 'Java', 'Python',
   'PostgreSQL', 'MongoDB', 'WebSockets', 'REST APIs', 'Machine Learning',
-  'Express.js', 'Tailwind CSS', 'Git', 'Docker', 'Algorithms',
+  'Express.js', 'Tailwind CSS', 'Git', 'Docker', 'Algorithms', 'Dev Ops', 'AWS', 'FastAPI',
 ]
 
 export default function Hero() {
