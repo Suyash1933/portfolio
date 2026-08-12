@@ -11,7 +11,7 @@ import Footer from '../components/Footer'
 import Desktop from '../components/os/Desktop'
 
 export default function Home() {
-  const [view, setView] = useState('plain')
+  const [view, setView] = useState('os')
   const [loading, setLoading] = useState(true)
   const [fadeOut, setFadeOut] = useState(false)
 
