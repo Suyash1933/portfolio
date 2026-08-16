@@ -114,9 +114,9 @@ export default function Window({
       onMouseDown={() => onFocus?.()}
       style={{
         position: 'absolute',
-        left: full ? 0 : pos.x,
+        left: full ? (isMobile ? 0 : 70) : pos.x,
         top: full ? 28 : pos.y,
-        width: full ? '100%' : size.w,
+        width: full ? (isMobile ? '100%' : 'calc(100% - 70px)') : size.w,
         height: full ? (isMobile ? 'calc(100% - 28px - 58px)' : 'calc(100% - 28px)') : size.h,
         zIndex,
         borderRadius: full ? 0 : 12,
