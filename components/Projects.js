@@ -7,7 +7,7 @@ const projects = [
     title: 'AI PR Review Agent',
     subtitle: 'Production-Grade Autonomous Code Review System',
     description:
-      'Open-source AI agent that receives GitHub PR webhooks, runs 4 parallel specialist sub-agents (security, quality, test coverage, docs), and posts structured reviews back to the PR. Low-confidence findings route to a human approval queue.',
+      'Multi-AI agent that receives GitHub PR webhooks, runs 4 parallel specialist sub-agents (security, quality, test coverage, docs), and posts structured reviews back to the PR. Low-confidence findings route to a human approval queue.',
     tech: ['Python', 'Claude Agent SDK', 'PostgreSQL', 'pgvectorscale', 'TimescaleDB', 'GitHub API'],
     bullets: [
       'Orchestrates 4 parallel sub-agents — security, code quality, test coverage, and docs — each reasoning over PR diff + codebase context via semantic search',
@@ -48,7 +48,7 @@ const projects = [
     color: '#7c6dfa',
     featured: true,
   },
-   {
+  {
     title: 'Nextflow',
     subtitle: 'Multi-tool AI Workspace',
     description:
@@ -118,7 +118,7 @@ const projects = [
     subtitle: 'Emotionally Aware Text-to-Speech Platform',
     description:
       'A Windows-friendly Python project that transforms plain text into emotionally aware speech. Detects emotion (positive, negative, concerned, inquisitive, surprised, neutral) using hybrid VADER sentiment analysis, maps emotions to vocal parameters (pitch, rate, volume), and generates playable .wav files. Features CLI, FastAPI web interface with emotion-aware theming, real-time audio player, and modular architecture for easy TTS engine swapping.',
-    tech: ['Python', 'FastAPI','React', 'VADER', 'SSML'],
+    tech: ['Python', 'FastAPI', 'React', 'VADER', 'SSML'],
     bullets: [
       'Hybrid NLP approach: VADER sentiment + custom keyword matching + phrase boosting + negation handling',
       'Dynamic vocal modulation adjusting pitch, rate, and volume based on emotion intensity (0-1 scale)',
