@@ -47,7 +47,7 @@ const experiences = [
     type: 'Backend Engineering',
     color: '#fa6d8f',
     tech: ['Java', 'SQLite', 'JSON Serialization', 'SQL', 'CLI'],
-    certificate: 'https://example.com/certificate-algonive',
+    certificate: 'https://drive.google.com/file/d/1HM1D5a3h06roTdiqw1qgMcKQG6RhPrve/view?usp=sharing',
     description:
       'Designed and built a Native Durable Execution Engine from scratch — inspired by Temporal and Cadence — enabling long-running workflows to survive crashes and resume exactly where they left off. Achieved zero data loss across 500+ simulated crash-recovery test runs.',
     points: [
@@ -66,7 +66,7 @@ const experiences = [
     type: 'Machine Learning',
     color: '#6dfabd',
     tech: ['Python', 'Pandas', 'NumPy', 'Scikit-Learn', 'LSTM', 'Jupyter'],
-    certificate: 'https://example.com/certificate-skillfied',
+    certificate: 'https://drive.google.com/file/d/1aRrid7dTbeYx1q8pGvieV3J1PC5tmGxU/view?usp=sharing',
     description:
       'Developed a deep learning forecasting pipeline for cultivated-meat production using LSTM networks. Improved prediction accuracy by 18% and stability by 20% through rigorous feature engineering and cross-validation — delivering insights that directly informed stakeholder scaling decisions.',
     points: [
@@ -97,7 +97,7 @@ export default function ExperienceWindow() {
             textTransform: 'uppercase',
           }}
         >
-          Companies
+          Experience
         </div>
         {experiences.map((e, i) => (
           <button

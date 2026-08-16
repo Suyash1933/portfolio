@@ -13,25 +13,25 @@ const skillGroups = [
     category: 'Frameworks & Libraries',
     icon: Globe,
     color: '#fa6d8f',
-    skills: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'FastAPI', 'Tailwind CSS', 'Scikit-Learn'],
+    skills: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'FastAPI', 'LangGraph', 'Tailwind CSS', 'Scikit-Learn'],
   },
   {
     category: 'Databases',
     icon: Database,
     color: '#6dfabd',
-    skills: ['MySQL', 'MongoDB', 'PostgreSQL (Neon)', 'SQLite'],
+    skills: ['MySQL', 'MongoDB', 'PostgreSQL (Neon)', 'SQLite', 'TimescaleDB', 'pgvector'],
   },
   {
     category: 'Tools & Platforms',
     icon: Wrench,
     color: '#fad96d',
-    skills: ['Git', 'GitHub', 'AWS', 'Postman', 'Vercel', 'Inngest', 'Clerk', 'WebSockets', 'REST APIs'],
+    skills: ['Git', 'GitHub', 'AWS', 'Kafka', 'Docker', 'CI/CD', 'Postman', 'Vercel', 'Inngest', 'Clerk', 'WebSockets', 'REST APIs'],
   },
   {
     category: 'Core Concepts',
     icon: BookOpen,
     color: '#6db8fa',
-    skills: ['DSA', 'OOP', 'Operating Systems', 'DBMS', 'Artificial Intelligence', 'Machine Learning', 'DevOps', 'Software Architecture'],
+    skills: ['DSA', 'OOP', 'Operating Systems', 'DBMS', 'Artificial Intelligence', 'Machine Learning', 'Multi-Agent Systems', 'RAG', 'Prompt Chaining', 'DevOps', 'Software Architecture'],
   },
 ]
 
@@ -166,32 +166,25 @@ export default function Skills() {
               </span>
             </div>
             <div className="flex items-start gap-3">
-              <div
+              <img
+                src="/iiita-logo.png"
+                alt="IIIT Allahabad"
                 style={{
-                  width: '38px',
-                  height: '38px',
+                  width: '40px',
+                  height: '40px',
                   borderRadius: '10px',
-                  background: 'rgba(124,109,250,0.15)',
-                  border: '1px solid rgba(124,109,250,0.3)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  objectFit: 'contain',
                   flexShrink: 0,
-                  fontFamily: 'Syne',
-                  fontWeight: 800,
-                  fontSize: '0.7rem',
-                  color: 'var(--accent)',
                 }}
-              >
-                IIIT
-              </div>
+                draggable={false}
+              />
               <div>
-                <p className="font-display font-bold text-sm">IIIT Prayagraj</p>
+                <p className="font-display font-bold text-sm">IIIT Allahabad</p>
                 <p style={{ color: 'var(--muted)', fontSize: '0.8rem' }}>
                   B.Tech in Information Technology
                 </p>
                 <p style={{ color: 'var(--muted)', fontSize: '0.75rem', fontFamily: 'JetBrains Mono', marginTop: '4px' }}>
-                  2022 – Present
+                  2022 – 2026
                 </p>
               </div>
             </div>

@@ -117,7 +117,7 @@ export default function Window({
         left: full ? 0 : pos.x,
         top: full ? 28 : pos.y,
         width: full ? '100%' : size.w,
-        height: full ? (isMobile ? 'calc(100% - 28px - 58px)' : 'calc(100% - 28px - 76px)') : size.h,
+        height: full ? (isMobile ? 'calc(100% - 28px - 58px)' : 'calc(100% - 28px)') : size.h,
         zIndex,
         borderRadius: full ? 0 : 12,
         background: '#111119',

@@ -1,6 +1,34 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
-import { Battery, BatteryCharging, Sun, RotateCw } from 'lucide-react'
+import { Sun, RotateCw } from 'lucide-react'
+
+function BatteryIndicator({ level, charging, size = 20, color = '#a0a0b8' }) {
+  const w = size
+  const h = size * 0.55
+  const bodyW = w * 0.82
+  const bodyH = h
+  const r = 2
+  const fillW = Math.max(0, (bodyW - 4) * (level / 100))
+  const tipW = w * 0.08
+  const tipH = h * 0.35
+  return (
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`}>
+      {/* Battery body */}
+      <rect x={0} y={0} width={bodyW} height={bodyH} rx={r} ry={r} fill="none" stroke={color} strokeWidth={1.5} />
+      {/* Fill */}
+      <rect x={2} y={2} width={fillW} height={bodyH - 4} rx={1} fill={color} />
+      {/* Tip */}
+      <rect x={bodyW + 1} y={(bodyH - tipH) / 2} width={tipW} height={tipH} rx={0.5} fill={color} />
+      {/* Charging bolt */}
+      {charging && (
+        <path
+          d={`M${bodyW * 0.55} ${h * 0.1} L${bodyW * 0.38} ${h * 0.5} L${bodyW * 0.52} ${h * 0.5} L${bodyW * 0.42} ${h * 0.9} L${bodyW * 0.62} ${h * 0.45} L${bodyW * 0.48} ${h * 0.45} Z`}
+          fill="#0e0e18"
+        />
+      )}
+    </svg>
+  )
+}
 
 export default function MenuBar() {
   const [time, setTime] = useState('')
@@ -81,7 +109,6 @@ export default function MenuBar() {
     return () => document.removeEventListener('mousedown', handler)
   }, [])
 
-  const BatteryIcon = isCharging ? BatteryCharging : Battery
   const batteryColor =
     batteryLevel <= 15 ? '#ff5f57' : batteryLevel <= 30 ? '#ffbd2e' : '#a0a0b8'
 
@@ -176,7 +203,7 @@ export default function MenuBar() {
             if (!showBatteryMenu) e.currentTarget.style.background = 'none'
           }}
         >
-          <BatteryIcon size={isMobile ? 14 : 20} style={{ color: batteryColor }} />
+          <BatteryIndicator level={batteryLevel} charging={isCharging} size={isMobile ? 16 : 22} color={batteryColor} />
           <span style={{ fontWeight: 500, color: batteryColor }}>
             {batteryLevel}%
           </span>
@@ -204,7 +231,7 @@ export default function MenuBar() {
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-              <BatteryIcon size={22} style={{ color: batteryLevel <= 15 ? '#ff3b30' : '#1a1a2e' }} />
+              <BatteryIndicator level={batteryLevel} charging={isCharging} size={24} color={batteryLevel <= 15 ? '#ff3b30' : '#1a1a2e'} />
               <div>
                 <div style={{ fontSize: '0.88rem', fontWeight: 600 }}>{batteryLevel}%</div>
                 <div style={{ fontSize: '0.68rem', color: '#666', marginTop: 1 }}>
