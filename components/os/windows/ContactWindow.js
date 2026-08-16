@@ -53,7 +53,7 @@ export default function ContactWindow() {
           Get In Touch
         </h3>
         <p style={{ color: '#6b6b80', fontSize: '0.82rem', lineHeight: 1.6 }}>
-          Open to opportunities — full-time roles, internships, or collaborations.
+          Open to opportunities. Let's Connect !!
         </p>
       </div>
 
