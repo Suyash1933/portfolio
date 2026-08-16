@@ -57,3 +57,6 @@ yarn-error.log*
 # Misc
 .turbo/
 dist/
+
+# Claude
+.claude/

@@ -4,6 +4,29 @@ import { Code2, ExternalLink, Github, Users, Trophy, ChevronDown, ChevronUp, Che
 
 const projects = [
   {
+    title: 'AI PR Review Agent',
+    subtitle: 'Production-Grade Autonomous Code Review System',
+    description:
+      'Open-source AI agent that receives GitHub PR webhooks, runs 4 parallel specialist sub-agents (security, quality, test coverage, docs), and posts structured reviews back to the PR. Low-confidence findings route to a human approval queue.',
+    tech: ['Python', 'Claude Agent SDK', 'PostgreSQL', 'pgvectorscale', 'TimescaleDB', 'GitHub API'],
+    bullets: [
+      'Orchestrates 4 parallel sub-agents — security, code quality, test coverage, and docs — each reasoning over PR diff + codebase context via semantic search',
+      'Unified data layer on TimescaleDB (Tiger Cloud): pgvectorscale DiskANN for RAG, hypertables for agent event tracing, continuous aggregates for real-time cost and latency dashboards',
+      'Token cost attribution per agent span with budget caps, powering cost-per-PR and p95 latency monitoring',
+      'Every agent action, LLM call, and decision recorded in a hypertable for full audit trail and trace viewing',
+      'Learns from merged vs rejected reviews over time, improving review accuracy iteratively',
+      'Gated pipeline: tests pass, evals pass, written checkpoint before each phase proceeds',
+    ],
+    highlights: [
+      { icon: Code2, value: '4', label: 'Sub-Agents' },
+      { icon: Trophy, value: 'HITL', label: 'Approval Queue' },
+      { icon: Users, value: 'Real-time', label: 'Dashboards' },
+    ],
+    github: 'https://github.com/Suyash1933/ai-pr-review-agent',
+    color: '#a855f7',
+    featured: true,
+  },
+  {
     title: 'CodeSync',
     subtitle: 'Codeforces Custom Contest Platform',
     description:

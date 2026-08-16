@@ -2,19 +2,10 @@
 import { Github, Linkedin, Mail, Phone, ExternalLink, Radius } from 'lucide-react'
 
 const info = [
-  { label: 'Location', value: 'Prayagraj, UP, India' },
-  { label: 'Education', value: 'B.Tech IT, IIIT Prayagraj' },
+  { label: 'Education', value: 'B.Tech IT, IIIT Allahabad' },
   { label: 'Batch', value: '2022 – 2026' },
-  // { label: 'CGPA', value: '8.10 / 10.0' },
-  { label: 'Status', value: 'Open to Work', highlight: true },
 ]
 
-const stats = [
-  { label: 'Internships', value: '3' },
-  { label: 'Live Projects', value: '2+' },
-  { label: 'Users', value: '140+' },
-  { label: 'Profiles', value: '3' },
-]
 
 const socials = [
   { icon: Github, label: 'GitHub', href: 'https://github.com/Suyash1933', color: '#e8e8f0' },
@@ -66,7 +57,7 @@ export default function AboutWindow() {
             fontSize: '0.78rem',
           }}
         >
-          Software Engineer & Full-Stack Developer
+          Hi there! Welcome to my portfolio! I'm Suyash, a passionate software developer with a love for creating innovative solutions. I enjoy exploring new technologies and continuously improving my skills.
         </p>
       </div>
 
@@ -105,42 +96,6 @@ export default function AboutWindow() {
               {highlight && '● '}
               {value}
             </span>
-          </div>
-        ))}
-      </div>
-
-      {/* Stats grid */}
-      <div
-        className="os-stats-grid"
-        style={{ marginBottom: 22 }}
-      >
-        {stats.map(({ label, value }) => (
-          <div
-            key={label}
-            style={{
-              background: 'rgba(255,255,255,0.025)',
-              borderRadius: 12,
-              padding: '14px 8px',
-              textAlign: 'center',
-              border: '1px solid rgba(255,255,255,0.05)',
-            }}
-          >
-            <div
-              style={{
-                fontFamily: 'Syne, sans-serif',
-                fontWeight: 800,
-                fontSize: '1.3rem',
-                background: 'linear-gradient(135deg, #7c6dfa, #fa6d8f)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              {value}
-            </div>
-            <div style={{ color: '#6b6b80', fontSize: '0.65rem', marginTop: 3 }}>
-              {label}
-            </div>
           </div>
         ))}
       </div>

@@ -79,24 +79,77 @@ export default function Dock({ apps, openWindows, activeWindow, onOpen, onSwitch
 
   const iconSize = isMobile ? 40 : 50
 
+  /* Mobile: keep bottom-center horizontal dock */
+  if (isMobile) {
+    return (
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 6,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 999998,
+          display: 'flex',
+          alignItems: 'flex-end',
+          gap: 4,
+          background: 'rgba(255,255,255,0.06)',
+          backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
+          borderRadius: 16,
+          padding: '6px 10px 5px',
+          border: '1px solid rgba(255,255,255,0.09)',
+          boxShadow: '0 8px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05)',
+        }}
+      >
+        {apps.map((app) => {
+          const CustomIcon = DOCK_ICON_MAP[app.id]
+          return (
+            <DockItem
+              key={app.id}
+              label={app.title}
+              color={app.color}
+              isOpen={!!openWindows[app.id]}
+              isActive={activeWindow === app.id}
+              onClick={() => onOpen(app.id)}
+              isMobile
+              vertical={false}
+            >
+              {CustomIcon ? <CustomIcon size={iconSize} /> : null}
+            </DockItem>
+          )
+        })}
+        {onSwitchView && (
+          <>
+            <div style={{ width: 1, height: 30, background: 'rgba(255,255,255,0.1)', alignSelf: 'center' }} />
+            <DockItem label="Plain View" color="#905895" isOpen={false} isActive={false} onClick={onSwitchView} isMobile vertical={false}>
+              <PlainViewIcon size={iconSize} />
+            </DockItem>
+          </>
+        )}
+      </div>
+    )
+  }
+
+  /* Desktop: vertical left-side dock */
   return (
     <div
       style={{
         position: 'absolute',
-        bottom: isMobile ? 6 : 10,
-        left: '50%',
-        transform: 'translateX(-50%)',
+        left: 0,
+        top: 0,
+        bottom: 0,
         zIndex: 999998,
         display: 'flex',
-        alignItems: 'flex-end',
-        gap: isMobile ? 4 : 8,
-        background: 'rgba(255,255,255,0.06)',
-        backdropFilter: 'blur(24px)',
-        WebkitBackdropFilter: 'blur(24px)',
-        borderRadius: isMobile ? 16 : 22,
-        padding: isMobile ? '6px 10px 5px' : '10px 14px 8px',
-        border: '1px solid rgba(255,255,255,0.09)',
-        boxShadow: '0 8px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05)',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 16,
+        background: 'rgba(10,10,20,0.8)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderRadius: 0,
+        padding: '0 10px',
+        borderRight: '1px solid rgba(255,255,255,0.06)',
       }}
     >
       {apps.map((app) => {
@@ -109,53 +162,38 @@ export default function Dock({ apps, openWindows, activeWindow, onOpen, onSwitch
             isOpen={!!openWindows[app.id]}
             isActive={activeWindow === app.id}
             onClick={() => onOpen(app.id)}
-            isMobile={isMobile}
+            isMobile={false}
+            vertical
           >
             {CustomIcon ? <CustomIcon size={iconSize} /> : null}
           </DockItem>
         )
       })}
-
-      {/* Plain View button on mobile */}
-      {isMobile && onSwitchView && (
-        <>
-          <div style={{ width: 1, height: isMobile ? 30 : 40, background: 'rgba(255,255,255,0.1)', alignSelf: 'center' }} />
-          <DockItem
-            label="Plain View"
-            color="#905895"
-            isOpen={false}
-            isActive={false}
-            onClick={onSwitchView}
-            isMobile={isMobile}
-          >
-            <PlainViewIcon size={iconSize} />
-          </DockItem>
-        </>
-      )}
     </div>
   )
 }
 
-function DockItem({ children, label, color, isOpen, isActive, onClick, isMobile }) {
+function DockItem({ children, label, color, isOpen, isActive, onClick, isMobile, vertical }) {
   const [hovered, setHovered] = useState(false)
 
   return (
     <div
       style={{
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: vertical ? 'row' : 'column',
         alignItems: 'center',
-        gap: isMobile ? 3 : 5,
+        gap: vertical ? 0 : (isMobile ? 3 : 5),
         position: 'relative',
       }}
     >
-      {/* Tooltip — desktop only */}
+      {/* Tooltip — desktop only, appears to the right for vertical dock */}
       {hovered && !isMobile && (
         <div
           style={{
             position: 'absolute',
-            bottom: '100%',
-            marginBottom: 10,
+            ...(vertical
+              ? { left: '100%', marginLeft: 12, top: '50%', transform: 'translateY(-50%)' }
+              : { bottom: '100%', marginBottom: 10 }),
             background: 'rgba(20,20,30,0.92)',
             backdropFilter: 'blur(10px)',
             color: '#e8e8f0',
@@ -168,6 +206,7 @@ function DockItem({ children, label, color, isOpen, isActive, onClick, isMobile 
             border: '1px solid rgba(255,255,255,0.08)',
             pointerEvents: 'none',
             boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+            zIndex: 999999,
           }}
         >
           {label}
@@ -180,31 +219,20 @@ function DockItem({ children, label, color, isOpen, isActive, onClick, isMobile 
         onMouseLeave={() => setHovered(false)}
         style={{
           background: 'none',
-          border: 'none',
-          padding: 0,
+          border: isOpen ? '2px solid rgba(255,255,255,0.25)' : '2px solid transparent',
+          borderRadius: 14,
+          padding: 3,
           cursor: 'pointer',
           outline: 'none',
           transform: hovered && !isMobile
-            ? 'translateY(-10px) scale(1.18)'
-            : 'translateY(0) scale(1)',
+            ? (vertical ? 'translateX(6px) scale(1.15)' : 'translateY(-10px) scale(1.18)')
+            : 'translate(0) scale(1)',
           transition: 'all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)',
           filter: hovered && !isMobile ? 'brightness(1.15)' : 'brightness(1)',
         }}
       >
         {children}
       </button>
-
-      {/* Active indicator */}
-      <div
-        style={{
-          width: isMobile ? 4 : 5,
-          height: isMobile ? 4 : 5,
-          borderRadius: '50%',
-          background: isOpen ? '#fff' : 'transparent',
-          boxShadow: isOpen ? '0 0 6px rgba(255,255,255,0.6)' : 'none',
-          transition: 'all 0.3s ease',
-        }}
-      />
     </div>
   )
 }

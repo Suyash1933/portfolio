@@ -16,8 +16,8 @@ const APP_CONFIG = [
     title: 'About Me',
     icon: User,
     color: '#7c6dfa',
-    defaultPos: { x: 200, y: 40 },
-    defaultSize: { w: 720, h: 420 },
+    defaultPos: { x: 90, y: 36 },
+    defaultSize: { w: 900, h: 460 },
     component: AboutWindow,
   },
   {
@@ -25,8 +25,8 @@ const APP_CONFIG = [
     title: 'Projects',
     icon: Code2,
     color: '#fa6d8f',
-    defaultPos: { x: 160, y: 40 },
-    defaultSize: { w: 820, h: 420 },
+    defaultPos: { x: 90, y: 36 },
+    defaultSize: { w: 940, h: 460 },
     component: ProjectsWindow,
   },
   {
@@ -34,8 +34,8 @@ const APP_CONFIG = [
     title: 'Experience',
     icon: Briefcase,
     color: '#6dfabd',
-    defaultPos: { x: 160, y: 40 },
-    defaultSize: { w: 820, h: 420 },
+    defaultPos: { x: 90, y: 36 },
+    defaultSize: { w: 940, h: 460 },
     component: ExperienceWindow,
   },
   {
@@ -43,8 +43,8 @@ const APP_CONFIG = [
     title: 'Skills & Tools',
     icon: Cpu,
     color: '#fad96d',
-    defaultPos: { x: 180, y: 40 },
-    defaultSize: { w: 800, h: 420 },
+    defaultPos: { x: 90, y: 36 },
+    defaultSize: { w: 940, h: 460 },
     component: SkillsWindow,
   },
   {
@@ -52,17 +52,17 @@ const APP_CONFIG = [
     title: 'Contact',
     icon: Mail,
     color: '#6db8fa',
-    defaultPos: { x: 220, y: 40 },
-    defaultSize: { w: 700, h: 420 },
+    defaultPos: { x: 90, y: 36 },
+    defaultSize: { w: 900, h: 460 },
     component: ContactWindow,
   },
 ]
 
 export default function Desktop({ onSwitchView }) {
-  const [openWindows, setOpenWindows] = useState({})
-  const [activeWindow, setActiveWindow] = useState(null)
-  const [zIndices, setZIndices] = useState({})
-  const [zCounter, setZCounter] = useState(11)
+  const [openWindows, setOpenWindows] = useState({ about: true })
+  const [activeWindow, setActiveWindow] = useState('about')
+  const [zIndices, setZIndices] = useState({ about: 11 })
+  const [zCounter, setZCounter] = useState(12)
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -158,7 +158,7 @@ export default function Desktop({ onSwitchView }) {
             flex: 1,
             position: 'relative',
             overflow: 'hidden',
-            backgroundImage: "url('/wallpaper.png')",
+            backgroundImage: "url('/wallpaper-original.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundColor: '#0a0a18',
@@ -187,8 +187,8 @@ export default function Desktop({ onSwitchView }) {
             <div
               style={{
                 position: 'absolute',
-                top: 48,
-                left: 20,
+                bottom: 20,
+                right: 20,
                 zIndex: 5,
               }}
             >

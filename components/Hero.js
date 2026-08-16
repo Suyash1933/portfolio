@@ -2,15 +2,6 @@
 import { useEffect, useRef } from 'react'
 import { Github, Linkedin, Mail, ArrowDown, Code2 } from 'lucide-react'
 
-const TECH_MARQUEE = [
-  'React.js', 'Next.js', 'Node.js', 'TypeScript', 'Java', 'Python',
-  'PostgreSQL', 'MongoDB', 'WebSockets', 'REST APIs', 'Machine Learning',
-  'Express.js', 'Tailwind CSS', 'Git', 'Docker', 'Algorithms', 'Dev Ops', 'AWS', 'FastAPI', 'Scikit-Learn',
-  'React.js', 'Next.js', 'Node.js', 'TypeScript', 'Java', 'Python',
-  'PostgreSQL', 'MongoDB', 'WebSockets', 'REST APIs', 'Machine Learning',
-  'Express.js', 'Tailwind CSS', 'Git', 'Docker', 'Algorithms', 'Dev Ops', 'AWS', 'FastAPI',
-]
-
 export default function Hero() {
   const blobRef = useRef(null)
 
@@ -29,8 +20,8 @@ export default function Hero() {
   return (
     <section
       id="about"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden grid-bg noise"
-      style={{ paddingTop: '80px' }}
+      className="relative flex flex-col justify-center overflow-hidden grid-bg noise"
+      style={{ paddingTop: '80px', paddingBottom: '60px' }}
     >
       {/* Ambient blobs */}
       <div
@@ -90,8 +81,7 @@ export default function Hero() {
             </div>
 
             <p className="text-muted leading-relaxed mb-8" style={{ fontSize: '1.05rem', maxWidth: '480px' }}>
-              B.Tech IT student at IIIT Allahabad, building scalable full-stack systems, AI-powered tools,
-              and real-time applications. Passionate about clean architecture and impactful software.
+              Hi there! Welcome to my portfolio! Iam suyash Mishra, a passionate software developer with a love for creating innovative solutions. Let's connect and build something amazing together!
             </p>
 
             <div className="flex flex-wrap items-center gap-4 mb-10">
@@ -242,29 +232,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Marquee ticker */}
-      <div
-        className="absolute bottom-0 left-0 right-0 overflow-hidden py-3"
-        style={{ borderTop: '1px solid var(--border)', background: 'rgba(17,17,24,0.6)' }}
-      >
-        <div className="marquee-track">
-          {TECH_MARQUEE.map((tech, i) => (
-            <span
-              key={i}
-              style={{
-                whiteSpace: 'nowrap',
-                marginRight: '32px',
-                color: i % 3 === 0 ? 'var(--accent)' : i % 3 === 1 ? 'var(--accent-2)' : 'var(--accent-3)',
-                fontFamily: 'JetBrains Mono',
-                fontSize: '0.75rem',
-                opacity: 0.8,
-              }}
-            >
-              {tech} ·
-            </span>
-          ))}
-        </div>
-      </div>
     </section>
   )
 }
