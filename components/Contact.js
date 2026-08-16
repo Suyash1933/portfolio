@@ -73,8 +73,7 @@ export default function Contact() {
             Contact Me
           </h2>
           <p className="text-muted mt-3" style={{ maxWidth: '520px', lineHeight: 1.7 }}>
-            I'm currently open to new opportunities — whether it's a full-time role, internship, or an
-            interesting project to collaborate on. Let's connect!
+            Open to new opportunities. Let's connect!
           </p>
         </div>
 
