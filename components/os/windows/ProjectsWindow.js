@@ -7,7 +7,7 @@ const projects = [
     title: 'AI PR Review Agent',
     subtitle: 'Production-Grade Autonomous Code Review System',
     description:
-      'Open-source AI agent that receives GitHub PR webhooks, runs 4 parallel specialist sub-agents (security, quality, test coverage, docs), and posts structured reviews back to the PR. Low-confidence findings route to a human approval queue.',
+      'Multi-AI agent that receives GitHub PR webhooks, runs 4 parallel specialist sub-agents (security, quality, test coverage, docs), and posts structured reviews back to the PR. Low-confidence findings route to a human approval queue.',
     tech: ['Python', 'Claude Agent SDK', 'PostgreSQL', 'pgvectorscale', 'TimescaleDB', 'GitHub API'],
     stats: '4 Specialist Agents · HITL Queue',
     bullets: [
