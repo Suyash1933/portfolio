@@ -23,7 +23,7 @@ function BatteryIndicator({ level, charging, size = 20, color = '#a0a0b8' }) {
       {charging && (
         <path
           d={`M${bodyW * 0.55} ${h * 0.1} L${bodyW * 0.38} ${h * 0.5} L${bodyW * 0.52} ${h * 0.5} L${bodyW * 0.42} ${h * 0.9} L${bodyW * 0.62} ${h * 0.45} L${bodyW * 0.48} ${h * 0.45} Z`}
-          fill="#ffff00"
+          fill="#CCFF00"
         />
       )}
     </svg>
